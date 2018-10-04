@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>APP IAJA</title>
+        <!-- Tell the browser to be responsive to screen width -->
+        <meta name="viewport" content="width=device-width, minimum-scale=1, maximum-scale=1" />
+
+        <!-- v4.0.0-alpha.6 -->
+        <link rel="stylesheet" href="dist/bootstrap/css/bootstrap.min.css">
+
+        <!-- Google Font -->
+        <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700" rel="stylesheet">
+
+        <!-- Theme style -->
+        <link rel="stylesheet" href="dist/css/style.css">
+        <link rel="stylesheet" href="dist/css/font-awesome/css/font-awesome.min.css">
+        <link rel="stylesheet" href="dist/css/et-line-font/et-line-font.css">
+        <link rel="stylesheet" href="dist/css/themify-icons/themify-icons.css">
+
+        <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+        <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+        <!--[if lt IE 9]>
+          <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+          <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+        <![endif]-->
+
+    </head>
+    <body class="hold-transition skin-blue sidebar-mini">
+        <div class="wrapper boxed-wrapper">
+            <header class="main-header"> 
+              <!-- Logo --> 
+              <a href="index.html" class="logo blue-bg"> 
+              <!-- logo for regular state and mobile devices --> 
+              <span class="logo-lg"><img src="dist/img/logo.png" alt=""></span> </a> 
+              <!-- Header Navbar: style can be found in header.less -->
+              <nav class="navbar blue-bg navbar-static-top"> 
+                <!-- Sidebar toggle button-->
+                <ul class="nav navbar-nav pull-left">
+                  <li><a class="sidebar-toggle" data-toggle="push-menu" href=""></a> </li>
+                </ul>
+              </nav>
+            </header>
+            <!-- Left side column. contains the logo and sidebar -->
+            <aside class="main-sidebar"> 
+              <!-- sidebar: style can be found in sidebar.less -->
+              <div class="sidebar"> 
+                <!-- Sidebar user panel -->
+                
+                <!-- sidebar menu: : style can be found in sidebar.less -->
+                <ul class="sidebar-menu" data-widget="tree">
+                	<li class="header"></li>
+                  <li> <a href="index.html"> <i class="ti-home"></i>   <span>HOME</span> </a></li>
+                  <li> <a href="quemsomos.html"> <i class="fa fa-users"></i> <span>QUEM SOMOS</span> </a></li>
+                  <li> <a href="faq.html"> <i class="fa fa-comments-o"></i> <span>FAQ</span> </a></li>
+                  <li> <a href="suporte.html"> <i class="fa fa-cogs"></i> <span>SUPORTE</span> <span class="pull-right-container"> </span> </a></li>
+                  <li> <a href="planos.html"> <i class="fa fa-bars"></i> <span>PLANOS</span> <span class="pull-right-container"> </span> </a></li>
+                  <li> <a href="login.html"> <i class="fa fa-user-o"></i> <span>LOGIN</span> <span class="pull-right-container"> </span> </a></li>
+                	<li> <a href="sobre.html"> <i class="fa fa-sitemap"></i> <span>SOBRE</span> <span class="pull-right-container"> </span> </a></li>
+                </ul>
+              </div>
+              <!-- /.sidebar --> 
+            </aside>
+
+            <!-- Content Wrapper. Contains page content -->
+            <div class="content-wrapper"> 
+              <!-- Content Header (Page header) -->
+              <div class="content-header sty-one">
+                <h1 class="text-black">Login</h1>
+                <ol class="breadcrumb">
+                  <li><a href="index.html">Home</a></li>
+                  <li><i class="fa fa-angle-right"></i> Login</li>
+                </ol>
+              </div>
+        
+                <!-- Main content -->
+                <div class="content">
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="login-box-body">
+                                <h3 class="login-box-msg">INFORME O CPF E DATA DE NASCIMENTO</h3>
+                                <form action="index.html" name="formLogin" id="formLogin" method="post">
+                                    <div class="form-group has-feedback">
+                                        <input type="text" class="form-control sty1" maxlength="15"  name="cpf" id="cpf" placeholder="CPF">
+                                    </div>
+                                    <div class="form-group has-feedback">
+                                        <input type="text" class="form-control sty1" name="nascimento" id="nascimento" placeholder="ANO DE NASCIMENTO">
+                                    </div>
+                                    <div>
+                                    <div class="col-xs-8">
+
+                                    </div>
+                                    <!-- /.col -->
+                                    <div class="col-xs-4 m-t-1">
+                                        <button type="button" name="buttonLogin" id="buttonLogin" class="btn btn-primary btn-block btn-flat">ENTRAR</button>
+                                    </div>
+                                    <!-- /.col --> 
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- /.content --> 
+            </div>
+            <!-- /.content-wrapper -->
+        </div>
+        <!-- ./wrapper --> 
+
+        <!-- jQuery 3 --> 
+        <script src="dist/js/jquery.min.js"></script> 
+
+        <!-- template --> 
+        <script src="dist/js/niche.js"></script>
+
+        <script src="lib/jQuery-Mask-Plugin-1.14.15/dist/jquery.mask.js"></script>
+
+        <script src="js/config.js"></script>
+
+        <script type="text/javascript">
+          jQuery(function($){
+              $("#cpf").mask("999.999.999-99");  
+          });
+        </script>
+
+
+        <script type="text/javascript">
+            $(function() {
+            $("#buttonLogin").on("click", function(event) {
+                event.preventDefault(); 
+
+                var cpf = $('#formLogin input[name^="cpf"]').val();
+                var nascimento = $('#formLogin input[name^="nascimento"]').val();
+              
+                console.log(cpf);
+                console.log(imei);
+                efetuarLogin(cpf,nascimento,imei);
+                });
+            }); 
+
+            //http://appiaja.adventistas.org/webapiiaja/PrimeiroAcesso?cpf=cpf&nascimento=10/10/1954&imei=ccccccccc
+            function efetuarLogin(cpf, nascimento, imei_usuario) {  
+                $.getJSON( servidor+'/webapiiaja/PrimeiroAcesso?cpf='+cpf+'&nascimento='+nascimento+'&imei='+imei+''  ) .done(function( json ) {   
+                    console.log(JSON.stringify(json)); 
+                    try { 
+                        //console.log(JSON.stringify(json));  
+                        /* if (json.root.sucesso) {
+                            alert('Login efetuado');
+                            //window.location.reload();
+                            console.log(cpf);
+                        } else {
+                            alert(json.root.msg); 
+                        }
+                        */
+                    } catch (e) {
+                        console.log(e.message); 
+                    }
+                }).fail(function( jqxhr, textStatus, error ) {
+                    alert('Servidor não encontrado!');
+                    var err = textStatus + ", " + error;
+                    console.log( "Request Failed: " + err );
+                });
+            }
+        </script>
+    </body>
+</html>
