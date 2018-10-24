@@ -30,18 +30,18 @@
     <body class="hold-transition skin-blue sidebar-mini">
         <div class="wrapper boxed-wrapper">
             <header class="main-header"> 
-              <!-- Logo --> 
-              <a href="index.html" class="logo blue-bg"> 
-              <!-- logo for regular state and mobile devices --> 
-              <span class="logo-lg"><img src="dist/img/logo.png" alt=""></span> </a> 
-              <!-- Header Navbar: style can be found in header.less -->
-              <nav class="navbar blue-bg navbar-static-top"> 
-                <!-- Sidebar toggle button-->
-                <ul class="nav navbar-nav pull-left">
-                  <li><a class="sidebar-toggle" data-toggle="push-menu" href=""></a> </li>
-                </ul>
-              </nav>
-            </header>
+                <!-- Logo --> 
+                <a href="index.html" class="logo blue-bg" style="background-color:#2F3742;"> 
+                <!-- logo for regular state and mobile devices --> 
+                <span class="logo-lg" style="float:left;"><img src="dist/img/logo.png" alt=""></span> </a> 
+                <!-- Header Navbar: style can be found in header.less -->
+                <nav class="navbar blue-bg navbar-static-top"> 
+                  <!-- Sidebar toggle button-->
+                  <ul class="nav navbar-nav pull-left">
+                    <li><a class="sidebar-toggle" data-toggle="push-menu" href=""></a> </li>
+                  </ul>
+                </nav>
+             </header>
             <!-- Left side column. contains the logo and sidebar -->
             <aside class="main-sidebar"> 
               <!-- sidebar: style can be found in sidebar.less -->
@@ -76,16 +76,43 @@
         
                 <!-- Main content -->
                 <div class="content">
-                    <div class="row">
+                
+                    <div class="row" id="login">
                         <div class="col-12">
                             <div class="login-box-body">
                                 <h3 class="login-box-msg">INFORME O CPF E DATA DE NASCIMENTO</h3>
-                                <form action="index.html" name="formLogin" id="formLogin" method="post">
+                                <form action="" name="formLogin" id="formLogin" method="post">
                                     <div class="form-group has-feedback">
                                         <input type="text" class="form-control sty1" maxlength="15"  name="cpf" id="cpf" placeholder="CPF">
                                     </div>
                                     <div class="form-group has-feedback">
-                                        <input type="text" class="form-control sty1" name="nascimento" id="nascimento" placeholder="ANO DE NASCIMENTO">
+                                        <input type="text" class="form-control sty1 date" name="nascimento" id="nascimento"  placeholder="ANO DE NASCIMENTO">
+                                    </div>
+                                    <div>
+                                    <div class="col-xs-8">
+										
+                                    </div>
+                                    <!-- /.col -->
+                                    <div class="col-xs-4 m-t-1">
+                                        <button type="button" name="buttonLogin" id="buttonLogin" class="btn btn-primary btn-block btn-flat">ACESSAR</button>
+                                    </div>
+                                    
+                                    <div class="m-t-2">Já possui Token no Email? <a href="javascript:ExibirFormToken();" class="text-center">Clique Aqui</a></div>
+                                    <!-- /.col --> 
+                                    </div>
+                                    
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="row" id="LoginToken" style="display:none;">
+                        <div class="col-12">
+                            <div class="login-box-body">
+                                <h3 class="login-box-msg">TOKEN</h3>
+                                <form action="" name="formToken" id="formToken" method="post">
+                                    <div class="form-group has-feedback">
+                                        <input type="text" class="form-control sty1" maxlength="15"  name="token" id="token" placeholder="Digite o Token">
                                     </div>
                                     <div>
                                     <div class="col-xs-8">
@@ -93,7 +120,7 @@
                                     </div>
                                     <!-- /.col -->
                                     <div class="col-xs-4 m-t-1">
-                                        <button type="button" name="buttonLogin" id="buttonLogin" class="btn btn-primary btn-block btn-flat">ENTRAR</button>
+                                        <button type="button" name="buttonToken" id="buttonToken" class="btn btn-primary btn-block btn-flat">CONFIRMAR</button>
                                     </div>
                                     <!-- /.col --> 
                                     </div>
@@ -101,6 +128,7 @@
                             </div>
                         </div>
                     </div>
+                    
                 </div>
                 <!-- /.content --> 
             </div>
@@ -114,45 +142,63 @@
         <!-- template --> 
         <script src="dist/js/niche.js"></script>
 
-        <script src="lib/jQuery-Mask-Plugin-1.14.15/dist/jquery.mask.js"></script>
+        <script src="lib/jquery_mask/dist/jquery.mask.js"></script>
 
         <script src="js/config.js"></script>
 
         <script type="text/javascript">
           jQuery(function($){
-              $("#cpf").mask("999.999.999-99");  
+              $("#cpf").mask("999.999.999-99");
+			  $('#nascimento').mask('00/00/0000');  
           });
         </script>
 
 
         <script type="text/javascript">
-            $(function() {
+            //LOGIN
+			$(function() {
             $("#buttonLogin").on("click", function(event) {
                 event.preventDefault(); 
 
                 var cpf = $('#formLogin input[name^="cpf"]').val();
                 var nascimento = $('#formLogin input[name^="nascimento"]').val();
-              
-                console.log(cpf);
-                console.log(imei);
+
                 efetuarLogin(cpf,nascimento,imei);
                 });
             }); 
-
-            //http://appiaja.adventistas.org/webapiiaja/PrimeiroAcesso?cpf=cpf&nascimento=10/10/1954&imei=ccccccccc
-            function efetuarLogin(cpf, nascimento, imei_usuario) {  
-                $.getJSON( servidor+'/webapiiaja/PrimeiroAcesso?cpf='+cpf+'&nascimento='+nascimento+'&imei='+imei+''  ) .done(function( json ) {   
-                    console.log(JSON.stringify(json)); 
+            function efetuarLogin(cpf, nascimento, imei) 
+			{  
+				var newcpf = cpf.replace(/[^\d]+/g,'')
+								
+			    $.getJSON( servidor+'/webapiiaja/Login?cpf='+newcpf+'&nascimento='+nascimento+'&imei='+imei+''  ) .done(function( json ) {   
+				
+                   //{"Cod":2,"Msg":"Enviamos o código de confirmação no email: ************@rdorval.com","Url":"https://appiaja.adventistas.org/webapiiaja/confirmaAcesso?cpf=dpf&codigo=codigo"} 
+				   
+					console.log(JSON.stringify(json)); 
                     try { 
-                        //console.log(JSON.stringify(json));  
-                        /* if (json.root.sucesso) {
-                            alert('Login efetuado');
-                            //window.location.reload();
-                            console.log(cpf);
-                        } else {
-                            alert(json.root.msg); 
+                        
+                        if (json.Cod === 2) {
+                            alert(json.Msg);
+                            $('#LoginToken').css('display','block');
+                            $('#login').css('display','none');
+                        
+						} 
+						else if(json.Cod === 1) {
+                            alert(json.Msg); 
+                        
+						}
+						else if(json.Cod === 3) {
+                            alert(json.Msg);
+						    
+                        }else if(json.Cod === 4) {
+                            alert(json.Msg); 
                         }
-                        */
+						else if(json.Cod === 0)
+						{
+							alert(json.Msg); 
+							window.location.href="menu_acesso.html";
+						}
+                        
                     } catch (e) {
                         console.log(e.message); 
                     }
@@ -162,6 +208,56 @@
                     console.log( "Request Failed: " + err );
                 });
             }
+			
+			//TOKEN
+			$(function() {
+            $("#buttonToken").on("click", function(event) {
+                event.preventDefault(); 
+
+                var token = $('#formToken input[name^="token"]').val();
+
+                efetuarToken(token,imei);
+                });
+            }); 
+            function efetuarToken(token, imei) 
+			{  
+												
+			    $.getJSON( servidor+'/webapiiaja/ConfirmaAcesso?imei='+imei+'&codigo='+token+'' ) .done(function( json ) {   
+			   
+                    try { 
+                        if (json.Cod === 0) {
+                            alert(json.Msg);
+							window.location.href="menu_acesso.html";
+                        
+						} 
+						else if(json.Cod === 1) {
+                            alert(json.Msg); 
+                        
+						}
+						else if(json.Cod === 3) {
+                            alert(json.Msg);
+						    
+                        }else if(json.Cod === 4) {
+                            alert(json.Msg); 
+                        }
+                        
+                    } catch (e) {
+                        console.log(e.message); 
+                    }
+                }).fail(function( jqxhr, textStatus, error ) {
+                    alert('Servidor não encontrado!');
+                    var err = textStatus + ", " + error;
+                    console.log( "Request Failed: " + err );
+                });
+            }
+			
+			//LINK TOKEN
+			function ExibirFormToken(){
+					$('#LoginToken').css('display','block');
+					$('#login').css('display','none');
+				
+				}
         </script>
+        
     </body>
 </html>

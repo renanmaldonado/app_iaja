@@ -24,12 +24,6 @@
 <link rel="stylesheet" href="dist/plugins/chartist-js/chartist-init.css">
 <link rel="stylesheet" href="dist/plugins/chartist-js/chartist-plugin-tooltip.css">
 
-<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-<!--[if lt IE 9]>
-  <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
-  <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-<![endif]-->
 
 </head>
 <body class="hold-transition skin-blue sidebar-mini">
@@ -76,46 +70,19 @@
     <div class="content"> 
       <!-- Small boxes (Stat box) -->
       <div class="row">
-      <div class="col-lg-4 m-b-3"> 
-            <!-- Card -->
-            <div class="card"> 
-                <a href="quemsomos.html" class="btn btn-primary" style="height:85px;"><span class="info-box-icon"><i class="fa fa-users"></i></span>  <br /><h5 style="float:left;">QUEM SOMOS</h5></a> 
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 style="text-align:center;" id="nome"></h5>
+                    </div>
+                </div>
             </div>
-            <!-- Card --> 
-          </div>
-          <div class="col-lg-4 m-b-3"> 
-            <!-- Card -->
-             <div class="card"> 
-                <a href="faq.html" class="btn btn-primary" style="height:85px;"><span class="info-box-icon"><i class="fa fa-comments-o"></i></span> <br /><h5 style="float:left;">FAQ</h5></a> 
-            </div>
-            <!-- Card --> 
-          </div>
-          <div class="col-lg-4 m-b-3"> 
-            <!-- Card -->
-             <div class="card"> 
-                <a href="suporte.html" class="btn btn-primary" style="height:85px;"><span class="info-box-icon"><i class="fa fa-cogs"></i></span>  <br /><h5 style="float:left;">SUPORTE</h5></a> 
-             </div>            <!-- Card --> 
-          </div>
-          <div class="col-lg-4 m-b-3"> 
-            <!-- Card -->
-             <div class="card"> 
-                <a href="planos.html" class="btn btn-primary" style="height:85px;"><span class="info-box-icon"><i class="fa fa-bars"></i></span>  <br /><h5 style="float:left;">PLANOS</h5></a> 
-             </div>
-            <!-- Card --> 
-          </div>
-          <div class="col-lg-4 m-b-3"> 
-            <!-- Card -->
-             <div class="card"> 
-                <a href="login.html" class="btn btn-primary" style="height:85px;"><span class="info-box-icon"><i class="fa fa-user-o"></i></span>  <br /><h5 style="float:left;">LOGIN</h5></a> 
-             </div>
-            <!-- Card --> 
-          </div>
-          <div class="col-lg-4 m-b-3"> 
-            <!-- Card -->
-             <div class="card"> 
-                <a href="sobre.html" class="btn btn-primary" style="height:85px;"><span class="info-box-icon"><i class="fa fa-sitemap"></i></span>  <br /><h5 style="float:left;">SOBRE</h5></a> 
-             </div>
-            <!-- Card --> 
+      </div>
+      <br />
+      <div class="row">
+
+      <div class="col-lg-4 m-b-3" id="menu"> 
+
           </div>
       </div>
       <!-- /.row --> 
@@ -134,5 +101,49 @@
 <!-- template --> 
 <script src="dist/js/niche.js"></script> 
 
+<script src="js/config.js"></script>
+
+<script type="text/javascript">
+			$(document).ready(function() { 
+			
+				//========= renderizador =============//
+				var renderizador; 
+				(function (renderizador) {
+					//---------//
+					
+					function geraTabela(json) {
+						var tabela = '';
+							var dados = json['dados'];
+							var nome = '';
+						for (var aa = 0, dados_1 = json; aa < dados_1.length; aa++) {
+							var linha = dados_1[aa];
+							var nome = linha.Nome;
+							    
+								tabela += '<div class="card" > '+
+								'<a href="sub_menu.html?posicao='+aa+'" class="btn btn-primary" style="height:85px;"><span class="info-box-icon"><i class="fa fa-users"></i></span>  <br /><h5 style="float:left;text-transform:uppercase;">' + linha['Menu'] + '</h5></a> </div><br />';
+						}
+						
+						$('#nome').empty().html(nome);
+						return tabela;
+					}
+					//---------//
+					renderizador.geraTabela = geraTabela;
+				})(renderizador || (renderizador = {}));
+				//========= renderizador =============//
+				
+				 
+				var jqxhr = $.getJSON(  servidor+'/webapiiaja/menu?imei='+imei+'', function() {
+					console.log( "success" );
+				}).done(function(json) {
+					$('#menu').empty().html( renderizador.geraTabela(json));
+					console.log( "second success" );
+				}).fail(function( jqxhr, textStatus, error ) {
+					var err = textStatus + ", " + error;
+					console.log( "Request Failed: " + err );
+				}).always(function() {
+					console.log( "complete" );
+				}); 
+			}); 
+        </script> 
 </body>
 </html>

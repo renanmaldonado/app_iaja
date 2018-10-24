@@ -1,13 +1,8 @@
 /*================== Servidor remoto Config =================*/
 //var servidor = 'http://eventos.usb.org.br/fortes'; 
- var servidor = 'https://appiaja.adventistas.org/';
+ var servidor = 'https://appiaja.adventistas.org';
 //var servidor = 'http://192.168.1.171/fortes';
 //var imei_usuario = '865592031966260';
-
-
- 
-
-
 
 function getIPs(callback){
     var ip_dups = {};
@@ -375,7 +370,7 @@ getIPs(function(ip){
 })(this);
 
 
-txt += "" + navigator.appCodeName + "";
+/*txt += "" + navigator.appCodeName + "";
 txt += "" + navigator.appName + "";
 txt += "" + navigator.appVersion + "";
 txt += "" + navigator.cookieEnabled + "";
@@ -383,7 +378,7 @@ txt += "" + navigator.language + "";
 txt += "" + navigator.onLine + "";
 txt += "" + navigator.platform + "";
 txt += "" + navigator.userAgent + "";
-
+*/
 
 var imei =   md5(txt);
 
