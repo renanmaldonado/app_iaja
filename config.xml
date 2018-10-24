@@ -4,7 +4,7 @@
     xmlns:gap   = "http://phonegap.com/ns/1.0"
     id          = "org.adventistas.iaja"
     versionCode = "4"
-    version     = "4.3.0">
+    version     = "4.4.0">
     
     <name>IAJA</name>
     <author email="rodrigo@rdorval.com" href="http://www.rdorval.com">
@@ -75,7 +75,7 @@
     <preference name="CameraUsesGeolocation" value="false" />
     <preference name="StatusBarOverlaysWebView" value="true" />
     <preference name="StatusBarStyle" value="lightcontent" />
-    <preference name="android-minSdkVersion" value="23" />
+    <preference name="android-minSdkVersion" value="17" />
     <preference name="SplashScreenDelay" value="3000" />
     <preference name="StatusBarOverlaysWebView" value="true" />
     <preference name="StatusBarStyle" value="lightcontent" />
