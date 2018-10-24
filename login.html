@@ -169,8 +169,8 @@
             function efetuarLogin(cpf, nascimento, imei) 
 			{  
 				var newcpf = cpf.replace(/[^\d]+/g,'')
-								
-			    $.getJSON( servidor+'/webapiiaja/Login?cpf='+newcpf+'&nascimento='+nascimento+'&imei='+imei+''  ) .done(function( json ) {   
+				var url = servidor+'/webapiiaja/Login?cpf='+newcpf+'&nascimento='+nascimento+'&imei='+imei+'';				
+			    $.getJSON(url) .done(function( json ) {   
 				
                    //{"Cod":2,"Msg":"Enviamos o código de confirmação no email: ************@rdorval.com","Url":"https://appiaja.adventistas.org/webapiiaja/confirmaAcesso?cpf=dpf&codigo=codigo"} 
 				   
@@ -203,7 +203,8 @@
                         console.log(e.message); 
                     }
                 }).fail(function( jqxhr, textStatus, error ) {
-                    alert('Servidor não encontrado!');
+                    alert('Servidor não encontrado!  : '   + url);
+					
                     var err = textStatus + ", " + error;
                     console.log( "Request Failed: " + err );
                 });
