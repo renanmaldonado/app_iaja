@@ -1,4 +1,3 @@
-cordova.define("cordova-plugin-network-information.Connection", function(require, exports, module) {
 /*
  *
  * Licensed to the Apache Software Foundation (ASF) under one
@@ -20,18 +19,13 @@ cordova.define("cordova-plugin-network-information.Connection", function(require
  *
 */
 
-/**
- * Network status
- */
 module.exports = {
-    UNKNOWN: 'unknown',
-    ETHERNET: 'ethernet',
-    WIFI: 'wifi',
-    CELL_2G: '2g',
-    CELL_3G: '3g',
-    CELL_4G: '4g',
-    CELL: 'cellular',
-    NONE: 'none'
-};
+    id: 'ios',
+    bootstrap: function () {
+        // Attach the console polyfill that is iOS-only to window.console
+        // see the file under plugin/ios/console.js
+        require('cordova/modulemapper').clobbers('cordova/plugin/ios/console', 'window.console');
 
-});
+        require('cordova/channel').onNativeReady.fire();
+    }
+};

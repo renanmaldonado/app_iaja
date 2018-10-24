@@ -1,4 +1,4 @@
-cordova.define("cordova-plugin-network-information.Connection", function(require, exports, module) {
+cordova.define("cordova-plugin-media-capture.helpers", function(require, exports, module) {
 /*
  *
  * Licensed to the Apache Software Foundation (ASF) under one
@@ -20,18 +20,27 @@ cordova.define("cordova-plugin-network-information.Connection", function(require
  *
 */
 
-/**
- * Network status
- */
-module.exports = {
-    UNKNOWN: 'unknown',
-    ETHERNET: 'ethernet',
-    WIFI: 'wifi',
-    CELL_2G: '2g',
-    CELL_3G: '3g',
-    CELL_4G: '4g',
-    CELL: 'cellular',
-    NONE: 'none'
-};
+var MediaFile = require('./MediaFile');
 
+function wrapMediaFiles(pluginResult) {
+    var mediaFiles = [];
+    var i;
+    for (i = 0; i < pluginResult.length; i++) {
+        var mediaFile = new MediaFile();
+        mediaFile.name = pluginResult[i].name;
+
+        // Backwards compatibility
+        mediaFile.localURL = pluginResult[i].localURL || pluginResult[i].fullPath;
+        mediaFile.fullPath = pluginResult[i].fullPath;
+        mediaFile.type = pluginResult[i].type;
+        mediaFile.lastModifiedDate = pluginResult[i].lastModifiedDate;
+        mediaFile.size = pluginResult[i].size;
+        mediaFiles.push(mediaFile);
+    }
+    return mediaFiles;
+}
+
+module.exports = {
+    wrapMediaFiles: wrapMediaFiles
+};
 });

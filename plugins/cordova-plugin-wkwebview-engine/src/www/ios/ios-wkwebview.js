@@ -1,4 +1,4 @@
-cordova.define("cordova-plugin-network-information.Connection", function(require, exports, module) {
+cordova.define("cordova-plugin-wkwebview-engine.ios-wkwebview", function(require, exports, module) {
 /*
  *
  * Licensed to the Apache Software Foundation (ASF) under one
@@ -20,18 +20,14 @@ cordova.define("cordova-plugin-network-information.Connection", function(require
  *
 */
 
-/**
- * Network status
- */
-module.exports = {
-    UNKNOWN: 'unknown',
-    ETHERNET: 'ethernet',
-    WIFI: 'wifi',
-    CELL_2G: '2g',
-    CELL_3G: '3g',
-    CELL_4G: '4g',
-    CELL: 'cellular',
-    NONE: 'none'
+var exec = require('cordova/exec');
+
+var WkWebKit = {
+    allowsBackForwardNavigationGestures: function (allow) {
+        exec(null, null, 'CDVWKWebViewEngine', 'allowsBackForwardNavigationGestures', [allow]);
+    }
 };
+
+module.exports = WkWebKit;
 
 });
