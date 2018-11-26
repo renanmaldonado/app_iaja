@@ -4,6 +4,16 @@
 //var servidor = 'http://192.168.1.171/fortes';
 //var imei_usuario = '865592031966260';
 
+
+var listaMenus = ["MenuContraChequePlanos", "MenuExtratoResgatePlanos","MenuJubilado" ,"MenuParticipante"];
+
+
+
+
+
+
+
+
 function getIPs(callback){
     var ip_dups = {};
 
@@ -87,7 +97,6 @@ getIPs(function(ip){
 	txt += '' + ip;
 });
 
-
 /*
  * JavaScript MD5
  * https://github.com/blueimp/JavaScript-MD5
@@ -105,13 +114,10 @@ getIPs(function(ip){
  * Other contributors: Greg Holt, Andrew Kepert, Ydnar, Lostinet
  * Distributed under the BSD License
  * See http://pajhome.org.uk/crypt/md5 for more info.
- */
-
-/* global define */
-
+ */ 
+/* global define */ 
 ;(function ($) {
-  'use strict'
-
+  'use strict' 
   /*
   * Add integers, wrapping at 2^32. This uses 16-bit operations internally
   * to work around bugs in some JS interpreters.
@@ -120,15 +126,13 @@ getIPs(function(ip){
     var lsw = (x & 0xffff) + (y & 0xffff)
     var msw = (x >> 16) + (y >> 16) + (lsw >> 16)
     return (msw << 16) | (lsw & 0xffff)
-  }
-
+  } 
   /*
   * Bitwise rotate a 32-bit number to the left.
   */
   function bitRotateLeft (num, cnt) {
     return (num << cnt) | (num >>> (32 - cnt))
-  }
-
+  } 
   /*
   * These functions implement the four basic operations the algorithm uses.
   */
@@ -147,7 +151,6 @@ getIPs(function(ip){
   function md5ii (a, b, c, d, x, s, t) {
     return md5cmn(c ^ (b | ~d), a, b, x, s, t)
   }
-
   /*
   * Calculate the MD5 of an array of little-endian words, and a bit length.
   */
@@ -247,7 +250,6 @@ getIPs(function(ip){
     }
     return [a, b, c, d]
   }
-
   /*
   * Convert an array of little-endian words to a string
   */
@@ -260,7 +262,6 @@ getIPs(function(ip){
     }
     return output
   }
-
   /*
   * Convert a raw string to an array of little-endian words
   * Characters >255 have their high-byte silently ignored.
@@ -278,14 +279,12 @@ getIPs(function(ip){
     }
     return output
   }
-
   /*
   * Calculate the MD5 of a raw string
   */
   function rstrMD5 (s) {
     return binl2rstr(binlMD5(rstr2binl(s), s.length * 8))
   }
-
   /*
   * Calculate the HMAC-MD5, of a key and some data (raw strings)
   */
@@ -306,7 +305,6 @@ getIPs(function(ip){
     hash = binlMD5(ipad.concat(rstr2binl(data)), 512 + data.length * 8)
     return binl2rstr(binlMD5(opad.concat(hash), 512 + 128))
   }
-
   /*
   * Convert a raw string to a hex string
   */
@@ -321,14 +319,12 @@ getIPs(function(ip){
     }
     return output
   }
-
   /*
   * Encode a string as utf-8
   */
   function str2rstrUTF8 (input) {
     return unescape(encodeURIComponent(input))
   }
-
   /*
   * Take string arguments and return either raw or hex encoded strings
   */
@@ -344,7 +340,6 @@ getIPs(function(ip){
   function hexHMACMD5 (k, d) {
     return rstr2hex(rawHMACMD5(k, d))
   }
-
   function md5 (string, key, raw) {
     if (!key) {
       if (!raw) {
@@ -357,7 +352,6 @@ getIPs(function(ip){
     }
     return rawHMACMD5(key, string)
   }
-
   if (typeof define === 'function' && define.amd) {
     define(function () {
       return md5
@@ -380,8 +374,9 @@ txt += "" + navigator.platform + "";
 txt += "" + navigator.userAgent + "";
 */
 
-var imei =   md5(txt);
-
+///============ var imei =   md5(txt); ===============
+var imei = "d41d8cd98f00b204e9800998ecf8427e";
+// var imei = "d41d8cd98f00b204e9800998ecf842rrdwerwerwer7e";
 console.log(imei);
  
 

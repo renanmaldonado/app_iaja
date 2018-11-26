@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -24,45 +24,50 @@
         <!--[if lt IE 9]>
           <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
           <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-        <![endif]-->
-
+        <![endif]--> 
     </head>
     <body class="hold-transition skin-blue sidebar-mini">
         <div class="wrapper boxed-wrapper">
-            <header class="main-header"> 
-                <!-- Logo --> 
-                <a href="index.html" class="logo blue-bg" style="background-color:#2F3742;"> 
-                <!-- logo for regular state and mobile devices --> 
-                <span class="logo-lg" style="float:left;"><img src="dist/img/logo.png" alt=""></span> </a> 
-                <!-- Header Navbar: style can be found in header.less -->
-                <nav class="navbar blue-bg navbar-static-top"> 
-                  <!-- Sidebar toggle button-->
-                  <ul class="nav navbar-nav pull-left">
-                    <li><a class="sidebar-toggle" data-toggle="push-menu" href=""></a> </li>
-                  </ul>
-                </nav>
-             </header>
-            <!-- Left side column. contains the logo and sidebar -->
-            <aside class="main-sidebar"> 
-              <!-- sidebar: style can be found in sidebar.less -->
-              <div class="sidebar"> 
-                <!-- Sidebar user panel -->
-                
-                <!-- sidebar menu: : style can be found in sidebar.less -->
-                <ul class="sidebar-menu" data-widget="tree">
-                	<li class="header"></li>
-                  <li> <a href="index.html"> <i class="ti-home"></i>   <span>HOME</span> </a></li>
-                  <li> <a href="quemsomos.html"> <i class="fa fa-users"></i> <span>QUEM SOMOS</span> </a></li>
-                  <li> <a href="faq.html"> <i class="fa fa-comments-o"></i> <span>FAQ</span> </a></li>
-                  <li> <a href="suporte.html"> <i class="fa fa-cogs"></i> <span>SUPORTE</span> <span class="pull-right-container"> </span> </a></li>
-                  <li> <a href="planos.html"> <i class="fa fa-bars"></i> <span>PLANOS</span> <span class="pull-right-container"> </span> </a></li>
-                  <li> <a href="login.html"> <i class="fa fa-user-o"></i> <span>LOGIN</span> <span class="pull-right-container"> </span> </a></li>
-                	<li> <a href="sobre.html"> <i class="fa fa-sitemap"></i> <span>SOBRE</span> <span class="pull-right-container"> </span> </a></li>
-                </ul>
-              </div>
-              <!-- /.sidebar --> 
-            </aside>
-
+			<header class="main-header">  
+				<!-- Header Navbar: style can be found in header.less -->
+				<nav class="navbar blue-bg navbar-static-top"> 
+					<!-- Sidebar toggle button-->
+					<ul class="nav navbar-nav pull-left" style="line-height: 1.0;">
+						<li><a class="sidebar-toggle" data-toggle="push-menu" href=""></a> </li>
+					</ul>
+					<!-- Logo --> 
+					<a href="index.html" > 
+					<!-- logo for regular state and mobile devices --> 
+					<label style="margin-bottom: 2px;;padding:5px 10px 5px 0px; background-color:#2f3742;"   ><img style="width:50px;" src="dist/img/logo.png" alt=""></label> 
+					</a> 
+					<br/>
+					<label class="text-white" style="padding-top:0px;margin-bottom: 0px;">
+						<span id="nomeUsuario" style="font-size:12px;font-weigh:300;"></span>
+					</label>
+				</nav>
+			</header>
+			<!-- Left side column. contains the logo and sidebar -->
+			<aside class="main-sidebar"> 
+				<!-- sidebar: style can be found in sidebar.less -->
+				<div class="sidebar"> 
+					<!-- Sidebar user panel --> 
+					<!-- sidebar menu: : style can be found in sidebar.less -->
+					<ul class="sidebar-menu" data-widget="tree">
+						<li class="header"></li>
+						<li> <a href="index.html"> <i class="ti-home"></i> <span>HOME</span> </a></li>
+						<li class="linklogado"> <a href="menu_dados.html"> <i class="fa fa-money"></i> <span>DADOS FINANCEIRO</span> </a></li>
+						<li> <a href="quemsomos.html"> <i class="fa fa-users"></i> <span>QUEM SOMOS</span> </a></li>
+						<li> <a href="faq.html"> <i class="fa fa-comments-o"></i> <span>FAQ</span> </a></li>
+						<li> <a href="suporte.html"> <i class="fa fa-cogs"></i> <span>SUPORTE</span> <span class="pull-right-container"> </span> </a></li>
+						<li> <a href="planos.html"> <i class="fa fa-bars"></i> <span>PLANOS</span> <span class="pull-right-container"> </span> </a></li>
+						<li> <a href="login.html"> <i class="fa fa-user-o"></i> <span>LOGIN</span> <span class="pull-right-container"> </span> </a></li>
+						<li> <a href="sobre.html"> <i class="fa fa-sitemap"></i> <span>SOBRE</span> <span class="pull-right-container"> </span> </a></li>
+					</ul>
+				</div>
+				<!-- /.sidebar --> 
+			</aside>
+			
+			
             <!-- Content Wrapper. Contains page content -->
             <div class="content-wrapper"> 
               <!-- Content Header (Page header) -->
@@ -75,8 +80,7 @@
               </div>
         
                 <!-- Main content -->
-                <div class="content">
-                
+                <div class="content"> 
                     <div class="row" id="login">
                         <div class="col-12">
                             <div class="login-box-body">
@@ -128,9 +132,27 @@
                             </div>
                         </div>
                     </div>
-                    
-                </div>
+                    <div class="row" id="LogoutUsuario" style="display:none;">
+                        <div class="col-12">
+                            <div class="login-box-body">
+                                <h3 class="login-box-msg">LOGOUT</h3>
+								<br/>
+                                <form action="" name="formLogout" id="formLogout" method="post">
+									<input type="hidden" name="cpf_usuario" id="cpf_usuario" value="">
+									<div>
+                                    <!-- /.col -->
+                                    <div class="col-xs-4 m-t-1">
+                                        <button type="button" name="buttonLogout" id="buttonLogout" class="btn btn-primary btn-block btn-flat ">SAIR</button>
+                                    </div>
+                                    <!-- /.col --> 
+                                    </div>
+                                </form>
+                            </div>
+						</div>
+					</div>
+                 </div> 
                 <!-- /.content --> 
+				
             </div>
             <!-- /.content-wrapper -->
         </div>
@@ -151,122 +173,55 @@
 
 
         <script src="lib/jquery_mask/dist/jquery.mask.js"></script>
-
-        <script src="js/config.js"></script>
-
+ 
         <script type="text/javascript">
-          jQuery(function($){
-              $("#cpf").mask("999.999.999-99");
-			  $('#nascimento').mask('00/00/0000');  
-          });
+            jQuery(function($){
+                $("#cpf").mask("999.999.999-99");
+                $('#nascimento').mask('00/00/0000');  
+            });
         </script>
-
-
+		
+		<script src="js/config.js"></script> 
+		<script src="js/verifica.js"></script>
+ 
         <script type="text/javascript">
             //LOGIN
-			$(function() {
-            $("#buttonLogin").on("click", function(event) {
-                event.preventDefault(); 
+            $(function(){
+                $("#buttonLogin").on("click", function(event) {
+                    event.preventDefault(); 
 
-                var cpf = $('#formLogin input[name^="cpf"]').val();
-                var nascimento = $('#formLogin input[name^="nascimento"]').val();
+                    var cpf = $('#formLogin input[name^="cpf"]').val();
+                    var nascimento = $('#formLogin input[name^="nascimento"]').val();
 
-                efetuarLogin(cpf,nascimento,imei);
+                    autentica.efetuarLogin(cpf,nascimento,imei);
                 });
-            }); 
-            function efetuarLogin(cpf, nascimento, imei) 
-			{  
-				var newcpf = cpf.replace(/[^\d]+/g,'')
-				var url = servidor+'/webapiiaja/Login?cpf='+newcpf+'&nascimento='+nascimento+'&imei='+imei+'';				
-			    $.getJSON(url) .done(function( json ) {   
-				
-                   //{"Cod":2,"Msg":"Enviamos o código de confirmação no email: ************@rdorval.com","Url":"https://appiaja.adventistas.org/webapiiaja/confirmaAcesso?cpf=dpf&codigo=codigo"} 
-				   
-					console.log(JSON.stringify(json)); 
-                    try { 
-                        
-                        if (json.Cod === 2) {
-                            alert(json.Msg);
-                            $('#LoginToken').css('display','block');
-                            $('#login').css('display','none');
-                        
-						} 
-						else if(json.Cod === 1) {
-                            alert(json.Msg); 
-                        
-						}
-						else if(json.Cod === 3) {
-                            alert(json.Msg);
-						    
-                        }else if(json.Cod === 4) {
-                            alert(json.Msg); 
-                        }
-						else if(json.Cod === 0)
-						{
-							alert(json.Msg); 
-							window.location.href="menu_acesso.html";
-						}
-                        
-                    } catch (e) {
-                        console.log(e.message); 
-                    }
-                }).fail(function( jqxhr, textStatus, error ) {
-                    alert('Servidor não encontrado!  : '   + url);
-					
-                    var err = textStatus + ", " + error;
-                    console.log( "Request Failed: " + err );
+            });  
+            //TOKEN
+            $(function() {
+                $("#buttonToken").on("click", function(event) {
+                    event.preventDefault();  
+                    var token = $('#formToken input[name^="token"]').val();
+                    autentica.efetuarToken(token,imei);
                 });
+            });  
+            //LINK TOKEN
+            function ExibirFormToken(){
+                $('#LoginToken').css('display','block');
+                $('#login').css('display','none'); 
             }
-			
-			//TOKEN
-			$(function() {
-            $("#buttonToken").on("click", function(event) {
-                event.preventDefault(); 
-
-                var token = $('#formToken input[name^="token"]').val();
-
-                efetuarToken(token,imei);
+            //LOGOUT
+            $(function(){
+                $("#buttonLogout").on("click", function(event) {
+                    event.preventDefault();  
+                    var cpf = $('#formLogout input[name^="cpf_usuario"]').val(); 
+                    autentica.efetuarLogout(cpf, imei);
                 });
-            }); 
-            function efetuarToken(token, imei) 
-			{  
-												
-			    $.getJSON( servidor+'/webapiiaja/ConfirmaAcesso?imei='+imei+'&codigo='+token+'' ) .done(function( json ) {   
-			   
-                    try { 
-                        if (json.Cod === 0) {
-                            alert(json.Msg);
-							window.location.href="menu_acesso.html";
-                        
-						} 
-						else if(json.Cod === 1) {
-                            alert(json.Msg); 
-                        
-						}
-						else if(json.Cod === 3) {
-                            alert(json.Msg);
-						    
-                        }else if(json.Cod === 4) {
-                            alert(json.Msg); 
-                        }
-                        
-                    } catch (e) {
-                        console.log(e.message); 
-                    }
-                }).fail(function( jqxhr, textStatus, error ) {
-                    alert('Servidor não encontrado!');
-                    var err = textStatus + ", " + error;
-                    console.log( "Request Failed: " + err );
-                });
-            }
-			
-			//LINK TOKEN
-			function ExibirFormToken(){
-					$('#LoginToken').css('display','block');
-					$('#login').css('display','none');
-				
-				}
+            });  
         </script>
-        
+		<script type="text/javascript"> 
+			$(document).ready(function() {
+				verifica.verificaRegistroLogout(servidor,imei);  
+			}); 
+		</script> 
     </body>
 </html>

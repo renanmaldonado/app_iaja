@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<title>APP IAJA</title>
+		<!-- Tell the browser to be responsive to screen width -->
+		<meta name="viewport" content="width=device-width, minimum-scale=1, maximum-scale=1" />
+
+		<!-- v4.0.0-alpha.6 -->
+		<link rel="stylesheet" href="dist/bootstrap/css/bootstrap.min.css">
+
+		<!-- Google Font -->
+		<link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700" rel="stylesheet">
+
+		<!-- Theme style -->
+		<link rel="stylesheet" href="dist/css/style.css">
+		<link rel="stylesheet" href="dist/css/font-awesome/css/font-awesome.min.css">
+		<link rel="stylesheet" href="dist/css/et-line-font/et-line-font.css">
+		<link rel="stylesheet" href="dist/css/themify-icons/themify-icons.css">
+
+		<!-- Chartist CSS -->
+		<link rel="stylesheet" href="dist/plugins/chartist-js/chartist.min.css">
+		<link rel="stylesheet" href="dist/plugins/chartist-js/chartist-init.css">
+		<link rel="stylesheet" href="dist/plugins/chartist-js/chartist-plugin-tooltip.css">
+ 
+	</head>
+	<body class="hold-transition skin-blue sidebar-mini">
+		<div class="wrapper boxed-wrapper">
+			<header class="main-header">  
+				<!-- Header Navbar: style can be found in header.less -->
+				<nav class="navbar blue-bg navbar-static-top"> 
+					<!-- Sidebar toggle button-->
+					<ul class="nav navbar-nav pull-left" style="line-height: 1.0;">
+						<li><a class="sidebar-toggle" data-toggle="push-menu" href=""></a> </li>
+					</ul>
+					<!-- Logo --> 
+					<a href="index.html" > 
+					<!-- logo for regular state and mobile devices --> 
+					<label style="margin-bottom: 2px;;padding:5px 10px 5px 0px; background-color:#2f3742;"   ><img style="width:50px;" src="dist/img/logo.png" alt=""></label> 
+					</a> 
+					<br/>
+					<label class="text-white" style="padding-top:0px;margin-bottom: 0px;">
+						<span id="nomeUsuario" style="font-size:12px;font-weigh:300;"></span>
+					</label>
+				</nav>
+			</header>
+			<!-- Left side column. contains the logo and sidebar -->
+			<aside class="main-sidebar"> 
+				<!-- sidebar: style can be found in sidebar.less -->
+				<div class="sidebar"> 
+					<!-- Sidebar user panel --> 
+					<!-- sidebar menu: : style can be found in sidebar.less -->
+					<ul class="sidebar-menu" data-widget="tree">
+						<li class="header"></li>
+						<li> <a href="index.html"> <i class="ti-home"></i> <span>HOME</span> </a></li>
+						<li class="linklogado"> <a href="menu_dados.html"> <i class="fa fa-money"></i> <span>DADOS FINANCEIRO</span> </a></li>
+						<li> <a href="quemsomos.html"> <i class="fa fa-users"></i> <span>QUEM SOMOS</span> </a></li>
+						<li> <a href="faq.html"> <i class="fa fa-comments-o"></i> <span>FAQ</span> </a></li>
+						<li> <a href="suporte.html"> <i class="fa fa-cogs"></i> <span>SUPORTE</span> <span class="pull-right-container"> </span> </a></li>
+						<li> <a href="planos.html"> <i class="fa fa-bars"></i> <span>PLANOS</span> <span class="pull-right-container"> </span> </a></li>
+						<li> <a href="login.html"> <i class="fa fa-user-o"></i> <span>LOGIN</span> <span class="pull-right-container"> </span> </a></li>
+						<li> <a href="sobre.html"> <i class="fa fa-sitemap"></i> <span>SOBRE</span> <span class="pull-right-container"> </span> </a></li>
+					</ul>
+				</div>
+				<!-- /.sidebar --> 
+			</aside>
+  
+  <!-- Content Wrapper. Contains page content -->
+  <div class="content-wrapper"> 
+    <!-- Content Header (Page header) -->
+    
+    <!-- Main content -->
+    <div class="content"> 
+      <!-- Small boxes (Stat box) -->
+      <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 style="text-align:center;" id="nome"></h5>
+                    </div>
+                </div>
+            </div>
+      </div>
+      <br />
+      <div class="row">
+
+      <div class="col-lg-4 m-b-3" id="menu"> 
+
+          </div>
+      </div>
+      <div class="row">
+        <div class="col-lg-12">
+          <div style="text-align:center;">
+            <a class="btn btn-lg btn-primary" href="#" onClick="window.history.back();">Voltar</a>
+          </div>
+        </div>  
+    </div>
+      <!-- /.row --> 
+      <!-- Main row -->
+      
+      
+      
+    <!-- /.content --> 
+  </div>
+</div>
+<!-- ./wrapper --> 
+
+        <!-- jQuery 3 --> 
+        <script src="dist/js/jquery.min.js"></script> 
+
+        <!-- template --> 
+        <script src="dist/js/niche.js"></script> 
+
+        <!-- PHONEGAP --> 
+        <script type="text/javascript" src="cordova.js"></script>
+        <script type="text/javascript" src="js/index.js"></script>
+        <script type="text/javascript">
+            app.initialize();
+        </script>
+
+
+		<script src="js/config.js"></script> 
+		<script src="js/verifica.js"></script>
+        <script src="js/funcoes.js"></script>
+
+        <script type="text/javascript">
+            $(document).ready(function() { 
+
+                //========= renderizador =============//
+                var renderizador; 
+                (function (renderizador) {
+
+                    //---------// 
+                    function geraTabela(json) {
+                        console.log(JSON.stringify(json));
+                        var tabela = '';  
+                        var lista = json.dados; 
+                        for (var aa = 0, dados_1 = lista ; aa < dados_1.length; aa++) {
+                            var linha = dados_1[aa]; 
+                            var Url = linha['Url'] ;
+                            console.log(Url) ;
+                            endereco = Url.split("/"); 
+                            var menuu1 = endereco[4]; 
+                            var menuu = menuu1.split("?"); 
+          
+                            if(listaMenus.indexOf(menuu[0]) != -1){
+                                console.log(Url + imei);
+                                tabela += '<div class="card"> '+
+                                '<a href="sub_sub_menu.html?posicao='+aa+'&Url=' +codifica(Url + imei) +'" class="btn btn-primary" style="height:85px;"> <br /><h5 style="float:left;text-transform:uppercase;">'
+                                + linha['Menu'] 
+                                + '</h5></a> </div><br />';
+                            }else{
+                                console.log(Url);
+                                tabela += '<div class="card"> '+
+                                '<a href="dados.html?posicao='+aa+'&Url=' +codifica(Url) +'" class="btn btn-primary" style="height:85px;"> <br /><h5 style="float:left;text-transform:uppercase;">'
+                                + linha['Menu'] 
+                                + '</h5></a> </div><br />';
+                            } 
+                        } 
+                        return tabela;
+                    }
+                    //---------//
+                    renderizador.geraTabela = geraTabela;
+                })(renderizador || (renderizador = {}));
+                //========= renderizador =============//
+
+                var params = location.getQueryParams();
+                var Url = descodifica(params['Url']);  
+                $('#nome').empty().html(params['Menu']);
+                console.log(Url); 
+
+                var jqxhr = $.getJSON( Url , function() {
+                    console.log( "success" );
+                }).done(function(json) {
+                    $('#menu').empty().html( renderizador.geraTabela(json));
+                    console.log( "second success" );
+                }).fail(function( jqxhr, textStatus, error ) {
+                    var err = textStatus + ", " + error;
+                    console.log( "Request Failed: " + err );
+                }).always(function() {
+                    console.log( "complete" );
+                }); 
+            }); 
+        </script> 
+		<script type="text/javascript"> 
+			$(document).ready(function() {
+				verifica.verificaRegistro(servidor,imei);  
+			}); 
+		</script> 
+    </body>
+</html>
