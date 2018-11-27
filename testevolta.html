@@ -122,39 +122,35 @@
 		<script src="js/funcoes-menu-dados.js"></script>
 		<script type="text/javascript">
 			$(document).ready(function() { 
+
 				var  Url = servidor +'/webapiiaja/MainMenu?imei=' + imei + '' ;
-  
-				if(verifica.verificaRegistro(servidor,imei)){
-					var params = location.getQueryParams();
+				$("#linkVoltar").on("click", function() { 
+					var JSONvoltamenu = JSON.parse(localStorage.getItem('voltamenu')); 
+					var UrlVolta = JSONvoltamenu.voltamenu[JSONvoltamenu.voltamenu.length - 1]; 
+					console.log(UrlVolta); 
+					// window.location.href = UrlVolta ;
+					JSONvoltamenu.voltamenu.splice(JSONvoltamenu.voltamenu.length - 1, 1);
+					localStorage.setItem('voltamenu',stringJSON);
+					console.log(JSONvoltamenu);
+				});
+				//localStorage.removeItem('voltamenu'); 
+				var stringJSON = '{ "voltamenu": ['; 
+				if(localStorage.getItem('voltamenu') != null && localStorage.getItem('voltamenu') != undefined && localStorage.getItem('voltamenu') != ''){
 					
-					var UrlVolta = 'menu_dados.html?Url=' + codifica(Url) + '&Menu=' ; 
-					$('#linkVoltar').attr("href",UrlVolta); 
-					if(params['Url'] != undefined && params['Url'] != null && params['Url'] != ''){ 
-						Url = descodifica(params['Url'])  ;
-						$('#voltar').css('display','block');
-						$('#nome').empty().html(params['Menu']);
-					}else{ 
-						$('#voltar').css('display','none'); 
-						$('#nome').empty().html('Menu Principal');
-					}
-					
-					/*================= BUSCA DINÂMICA DE DADOS DA API IAJA EM FOMATO JSON ==================*/
-					console.log(Url);  
-					var jqxhr = $.getJSON( Url  , function() {
-						//console.log( "success" );
-					}).done(function(json) {
-						$('#menu').empty().html( renderizador.geraTabela(json));
-						//console.log( "second success" );
-					}).fail(function( jqxhr, textStatus, error ) {
-						var err = textStatus + ", " + error;
-						console.log( "Request Failed: " + err );
-					}).always(function() {
-						//console.log( "complete" );
-					}); 
-					/*================= BUSCA DINÂMICA DE DADOS DA API IAJA EM FOMATO JSON ==================*/
-				}else{
-				
+					var JSONvoltamenu = JSON.parse(localStorage.getItem('voltamenu')); 
+					for (var cc = 0, dados_1 = JSONvoltamenu.voltamenu; cc < dados_1.length; cc++) {
+						var urlJSON = dados_1[cc];
+						stringJSON += '"' +  'menu_dados.html?Url=' + codifica(urlJSON) + '&Menu='+ '",';
+					} 
+					stringJSON += '"' +  'menu_dados.html?Url=' + codifica(Url) + '&Menu='+ '"';
 				}
+				stringJSON += ']}';
+				localStorage.setItem('voltamenu',stringJSON);
+				
+				//
+				// http://iajateste.siteseguro.ws/menu_dados.html?Url=2f4d61696e4d656e753f696d65693d6434316438636439386630306232303465393830303939386563663834323765&Menu=
+			   
+			 
 			}); 
 		</script> 
 	</body>

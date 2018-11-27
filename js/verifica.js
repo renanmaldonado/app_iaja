@@ -21,13 +21,14 @@ var verifica;
 			json = data ;  
 			if(json.Registrado){
 				$('.linklogado').css("display","block");	
-				$('#nomeUsuario').empty().html(json.Nome);
+				$('#nomeUsuario').empty().html(limitarString(json.Nome,40));
 				retorno = true;
 			}else{
 				$('.linklogado').css("display","none");
 				retorno = false; 
 			}
 		}).fail(function(jqXHR, textStatus, errorThrown  ) {  
+			/*
 			console.log('----------------');
 			console.log( "Falha na requisição de dados : ");
 			console.log(jqXHR); 
@@ -36,7 +37,7 @@ var verifica;
 			console.log('....');
 			console.log(errorThrown);
 			console.log('----------------'); 
-		}).always(function() { 
+			*/
 		}); 
 		return retorno ;
 	}
@@ -49,14 +50,14 @@ var verifica;
 			url: verlink,
 			method: "GET",
 			cache: false,
-			dataType: "json",
+			//dataType: "json",
 			async : false,
 			statusCode: {
 				404: function() { 
 					console.log('Servidor inacessível');
 				}
 			}
-		}).done(function( data, textStatus, jqXHR  ) { 
+		}).done(function( data, textStatus, jqXHR ) { 
 			json = data ;   
 			if(json.Registrado ){ 
 				sugereLogout(json.Cpf);
@@ -64,9 +65,10 @@ var verifica;
 			}else{
 				sugereLogin();
 				retorno = false; 
-			}  
+			}   
+			
 		}).fail(function(jqXHR, textStatus, errorThrown  ) {  
-			/*console.log('----------------');
+			console.log('----------------');
 			console.log( "Falha na requisição de dados : ");
 			console.log(jqXHR); 
 			console.log('....');
@@ -74,9 +76,8 @@ var verifica;
 			console.log('....');
 			console.log(errorThrown);
 			console.log('----------------'); 
-			*/
-			sugereLogin();
-			
+ 
+			sugereLogin(); 
 		}); 
 		return retorno ;
 	}
@@ -86,14 +87,28 @@ var verifica;
 		$('#LogoutUsuario').css("display","none");
 		$('.linklogado').css("display","none");
 	}
+	
 	function sugereLogout(cpf_usuario){
-	 
+	
 		$('#formLogin input[name^="cpf_usuario"]').val(cpf_usuario);
-		$('.linklogado').css("display","block");	
-		$('#nomeUsuario').empty().html(json.Nome); 
+		$('.linklogado').css("display","block");	 
+		  
+		$('#nomeUsuario').empty().html(limitarString(json.Nome,45)); 
 		$('#LogoutUsuario').css("display","block");
 		$('#login').css("display","none");
 	}
+	
+	function limitarString(str, size){
+		if (str==undefined || str=='undefined' || str =='' || size==undefined || size=='undefined' || size ==''){
+			return str;
+		} 
+		var shortText = str;
+		if(str.length >= size+3){
+			shortText = str.substring(0, size).concat(' ...');
+		}
+		return shortText;
+	}
+	//sdfsdfsd sdf asdf asdf a asdf asdf 435  asdfasgf
 	//---------//
 	verifica.verificaRegistro = verificaRegistro; 
 	verifica.verificaRegistroLogout = verificaRegistroLogout; 
@@ -115,7 +130,7 @@ var autentica;
 			try {
 				if (json.Cod === 0) {
 					alert(json.Msg);
-					window.location.href="menu_acesso.html";
+					window.location.href="menu_dados.html";
 				} 
 				else if(json.Cod === 1) {
 					alert(json.Msg); 
@@ -137,12 +152,10 @@ var autentica;
 	function efetuarLogin(cpf, nascimento, imei){  
 		var newcpf = cpf.replace(/[^\d]+/g,'')
 		var Url = servidor+'/webapiiaja/Login?cpf='+newcpf+'&nascimento='+nascimento+'&imei='+imei+'';	
-		console.log(Url);
-
+		console.log(Url); 
 		var jqxhr1 = $.getJSON( Url  , function() {
 			console.log( "success" );
-		}).done(function(json) {
-			//{"Cod":2,"Msg":"Enviamos o código de confirmação no email: ************@rdorval.com","Url":"https://appiaja.adventistas.org/webapiiaja/confirmaAcesso?cpf=dpf&codigo=codigo"} 
+		}).done(function(json) { 
 			console.log(JSON.stringify(json)); 
 			try {  
 				if (json.Cod === 2) {
@@ -152,15 +165,12 @@ var autentica;
 				} 
 				else if(json.Cod === 1) {
 					alert(json.Msg);  
-				}
-				else if(json.Cod === 3) {
+				} else if(json.Cod === 3) {
 					alert(json.Msg);
 
 				}else if(json.Cod === 4) {
 					alert(json.Msg); 
-				}
-				else if(json.Cod === 0)
-				{
+				} else if(json.Cod === 0) {
 					alert(json.Msg); 
 					window.location.href="menu_dados.html";
 				} 
@@ -174,22 +184,24 @@ var autentica;
 			console.log( "Request Failed: " + err );
 		}).always(function() {
 			console.log( "complete" );
-		}); 
-
+		});  
 	}
+	
 	//---------//
 	function efetuarLogout(cpf,  imei){  
 		var newcpf = cpf.replace(/[^\d]+/g,'')
-		var Url = servidor+'/webapiiaja/Logouuuuuuuuuuuuuuuuuuuuuuuut?cpf='+newcpf+'&imei='+imei+'';	
-		console.log(Url);
-
+		var Url = servidor + '/webapiiaja/Logout?imei='+imei+'';	
+		console.log(Url); 
 		var jqxhr1 = $.getJSON( Url  , function() {
 			console.log( "success" );
-		}).done(function(json) {
-			//{"Cod":2,"Msg":"Enviamos o código de confirmação no email: ************@rdorval.com","Url":"https://appiaja.adventistas.org/webapiiaja/confirmaAcesso?cpf=dpf&codigo=codigo"} 
+		}).done(function(json) { 
 			console.log(JSON.stringify(json)); 
-			try {  
-				
+			// {"Cod":0,"Msg":"Seu Aparelho foi desconecato do IAJA com sucesso !!","Url":"https://appiaja.adventistas.org/webapiiaja/MainMenu/imei="}
+			try {   
+				if (json.Cod === 0) {
+					alert(json.Msg); 
+					window.location.href="index.html";
+				} 
 			} catch (e) {
 				console.log(e.message); 
 			}
@@ -199,7 +211,8 @@ var autentica;
 			var err = textStatus + ", " + error;
 			console.log( "Request Failed: " + err );
 		});  
-	} 
+	}
+	
 	//---------//
 	autentica.efetuarToken = efetuarToken;  
 	autentica.efetuarLogin = efetuarLogin;  

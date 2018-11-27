@@ -166,11 +166,11 @@ var renderizador;
 			$('#caixalaranja').empty().html();
 			$('#resumoLiquido').css("display","block");
 			var captions = json['captions'];   
-			for (var jj = 0, ca = captions; jj < ca.length; jj++) {
+			for ( var jj = 0, ca = captions; jj < ca.length; jj++ ) {
 				var capt = ca[jj]; 
-				caixalaranja += '<h6 class="info-box-text text-white" style="text-align:'+((capt.Centraliza)? 'center':'left' )+';font-size:'+capt.TamFont+'px;'+((capt.Negrito)? 'font-weight:700;' :''  )+'">'+capt.Nome+'</h6>' ;
-			}  
-			
+				caixalaranja += '<h6 class="info-box-text" style="text-align:'+( (capt.Centraliza)? 'center':'left' )
+				+';font-size:'+capt.TamFont+'px;'+((capt.Negrito)? 'font-weight:700;' :''  )+' color:' + ( (capt.ResumoCor != null)? ''+capt.ResumoCor  :'#fff'  ) + '">'+capt.Nome+'</h6>' ;
+			}   
 			$('#caixalaranja').empty().html(caixalaranja);
 		}else{ 
 			$('#resumoLiquido').css("display","none"); 
@@ -198,7 +198,8 @@ var renderizador;
 				tabela += '<div class="info-box-content">'; 
 				for (var jj = 0, ca = captions; jj < ca.length; jj++) {
 					var capt = ca[jj];
-					tabela += '<h6 class="info-box-text text-white" style="text-align:'+((capt.Centraliza)? 'center':'left' )+';font-size:'+capt.TamFont+'px;'+((capt.Negrito)? 'font-weight:700;' :''  )+'">'+capt.Nome+'</h6>' ;
+					tabela += '<h6 class="info-box-text text-white" style="text-align:'+((capt.Centraliza)? 'center':'left' )
+					+';font-size:'+capt.TamFont+'px;'+((capt.Negrito)? 'font-weight:700;' :''  )+'color:'+((capt.ResumoCor != null)? ''+capt.ResumoCor  :'#fff'  )+'">'+capt.Nome+'</h6>' ;
 				}
 				tabela += '</div>'; 
 				tabela += '</div>';  

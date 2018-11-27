@@ -39,7 +39,7 @@ var renderizador;
 					URLhref = "javascript:proc.procedimentoExterno('"+Url+"')" ;
 					icone_fa =  '<i class="fa fa-share-square-o" aria-hidden="true"></i>' ;
 				}else{
-					URLhref = ( (linha['Grid'])? 'dados.html?posicao='+aa+'&Url='+codifica(Url+ imei) : 'menu_dados.html?posicao='+aa+'&Url=' +codifica(Url + imei)) +'&Menu=' + linha['Menu'] ;
+					URLhref = ( (linha['Grid'])? 'dados.html?posicao=' + aa + '&Url='+codifica(Url + imei) : 'menu_dados.html?posicao=' + aa + '&Url=' +codifica(Url + imei)) +'&Menu=' + linha['Menu'] ;
 					icone_fa = ((linha['Grid'])?'<i class="fa fa-table" aria-hidden="true"></i>' : '<i class="fa fa-bars" aria-hidden="true"></i>');									
 				}
 				

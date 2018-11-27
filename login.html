@@ -38,11 +38,11 @@
 					<!-- Logo --> 
 					<a href="index.html" > 
 					<!-- logo for regular state and mobile devices --> 
-					<label style="margin-bottom: 2px;;padding:5px 10px 5px 0px; background-color:#2f3742;"   ><img style="width:50px;" src="dist/img/logo.png" alt=""></label> 
+					<label style="margin-bottom: 1px;padding:5px 10px 0px 0px; background-color:#2f3742;"   ><img style="width:50px;" src="dist/img/logo.png" alt=""></label> 
 					</a> 
 					<br/>
 					<label class="text-white" style="padding-top:0px;margin-bottom: 0px;">
-						<span id="nomeUsuario" style="font-size:12px;font-weigh:300;"></span>
+						<span id="nomeUsuario" style="font-size:14px;font-weigh:300;"></span>
 					</label>
 				</nav>
 			</header>
@@ -81,7 +81,7 @@
         
                 <!-- Main content -->
                 <div class="content"> 
-                    <div class="row" id="login">
+                    <div class="row" id="login" style="display:none;">
                         <div class="col-12">
                             <div class="login-box-body">
                                 <h3 class="login-box-msg">INFORME O CPF E DATA DE NASCIMENTO</h3>
@@ -101,7 +101,7 @@
                                         <button type="button" name="buttonLogin" id="buttonLogin" class="btn btn-primary btn-block btn-flat">ACESSAR</button>
                                     </div>
                                     
-                                    <div class="m-t-2">Já possui Token no Email? <a href="javascript:ExibirFormToken();" class="text-center">Clique Aqui</a></div>
+                                    <div class="m-t-2">Já possui Token no Email? <a href="javascript:exibirFormToken();" class="text-center">Clique Aqui</a></div>
                                     <!-- /.col --> 
                                     </div>
                                     
@@ -126,6 +126,7 @@
                                     <div class="col-xs-4 m-t-1">
                                         <button type="button" name="buttonToken" id="buttonToken" class="btn btn-primary btn-block btn-flat">CONFIRMAR</button>
                                     </div>
+									<div class="m-t-2">Deseja reenviar o token por email ? <a href="javascript:exibirFormLogin();" class="text-center">Clique Aqui</a></div>
                                     <!-- /.col --> 
                                     </div>
                                 </form>
@@ -161,6 +162,7 @@
         <!-- jQuery 3 --> 
         <script src="dist/js/jquery.min.js"></script> 
 
+		
         <!-- template --> 
         <script src="dist/js/niche.js"></script>
         
@@ -184,39 +186,43 @@
 		<script src="js/config.js"></script> 
 		<script src="js/verifica.js"></script>
  
-        <script type="text/javascript">
-            //LOGIN
-            $(function(){
+        <script type="text/javascript"> 
+			$(document).ready(function()
+			{
+				//LOGIN
                 $("#buttonLogin").on("click", function(event) {
-                    event.preventDefault(); 
-
+                    event.preventDefault();  
                     var cpf = $('#formLogin input[name^="cpf"]').val();
-                    var nascimento = $('#formLogin input[name^="nascimento"]').val();
-
+                    var nascimento = $('#formLogin input[name^="nascimento"]').val(); 
                     autentica.efetuarLogin(cpf,nascimento,imei);
                 });
-            });  
-            //TOKEN
-            $(function() {
+            
+				//TOKEN 
                 $("#buttonToken").on("click", function(event) {
                     event.preventDefault();  
                     var token = $('#formToken input[name^="token"]').val();
                     autentica.efetuarToken(token,imei);
                 });
-            });  
-            //LINK TOKEN
-            function ExibirFormToken(){
-                $('#LoginToken').css('display','block');
-                $('#login').css('display','none'); 
-            }
-            //LOGOUT
-            $(function(){
+         
+
+				
+				//LOGOUT 
                 $("#buttonLogout").on("click", function(event) {
                     event.preventDefault();  
                     var cpf = $('#formLogout input[name^="cpf_usuario"]').val(); 
                     autentica.efetuarLogout(cpf, imei);
-                });
-            });  
+                }); 
+            }); 
+			//EXIBI TOKEN
+			function exibirFormToken(){
+				$('#LoginToken').css('display','block');
+				$('#login').css('display','none'); 
+			}
+			//EXIBI LOGIN
+			function exibirFormLogin(){
+				$('#LoginToken').css('display','none');
+				$('#login').css('display','block'); 
+			}
         </script>
 		<script type="text/javascript"> 
 			$(document).ready(function() {
