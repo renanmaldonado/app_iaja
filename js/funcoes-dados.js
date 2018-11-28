@@ -1,4 +1,4 @@
-//========= dadosconta =============//
+﻿//========= dadosconta =============//
 var dadosconta; 
 (function (dadosconta) {
 	//---------// 
@@ -63,7 +63,7 @@ var dadosconta;
 						}else if( linha[coluna] == 0){
 							tdValor = '<td style="font-size: '+tamFont+'px; height:'+altLin+'px;width:33%;text-align:right;">' +'<span style="color:#000;">'+ numeroParaMoeda(linha[coluna])+'</span> </td>';
 						}else if(linha[coluna] > 0){
-							tdValor = '<td style="font-size: '+tamFont+'px; height:'+altLin+'px;width:33%;text-align:right;">' +'<span style="color:#070;">'+ numeroParaMoeda(linha[coluna])+'</span> </td>';
+							tdValor = '<td style="font-size: '+tamFont+'px; height:'+altLin+'px;width:33%;text-align:right;">' +'<span style="color:#080;">'+ numeroParaMoeda(linha[coluna])+'</span> </td>';
 						}else{
 							tdValor = '<td style="font-size: '+tamFont+'px; height:'+altLin+'px;width:33%;text-align:right;">' + numeroParaMoeda(linha[coluna])+ '</td>';
 						} 	  
@@ -203,7 +203,7 @@ var renderizador;
 				}
 				tabela += '</div>'; 
 				tabela += '</div>';  
-			/*	"Nome": "Valor l�quido: R$ 446,25",
+			/*	"Nome": "Valor líquido: R$ 446,25",
           "TamFont": 14,
           "Negrito": true
 		  */
@@ -248,7 +248,7 @@ var renderizador;
 							}else if( linha[coluna] == 0){
 								tdValor = '<td style="font-size: '+tamFont+'px;  height:'+altLin+'px; width:33%;text-align:right;">' +'<span style="color:#000;">'+ numeroParaMoeda(linha[coluna])+'</span> </td>';
 							}else if(linha[coluna] > 0){
-								tdValor = '<td style="font-size: '+tamFont+'px;  height:'+altLin+'px; width:33%;text-align:right;">' +'<span style="color:#070;">'+ numeroParaMoeda(linha[coluna])+'</span> </td>';
+								tdValor = '<td style="font-size: '+tamFont+'px;  height:'+altLin+'px; width:33%;text-align:right;">' +'<span style="color:#080;">'+ numeroParaMoeda(linha[coluna])+'</span> </td>';
 							}else{
 								tdValor = '<td style="font-size: '+tamFont+'px;  height:'+altLin+'px; width:33%;text-align:right;">' + numeroParaMoeda(linha[coluna])+ '</td>';
 							} 	  

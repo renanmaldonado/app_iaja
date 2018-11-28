@@ -1,4 +1,4 @@
-//========= renderizador =============//
+ï»¿//========= renderizador =============//
 var renderizador; 
 (function (renderizador) {
 
@@ -19,7 +19,10 @@ var renderizador;
 			//$('#cosoleLogMenu').append(JSON.stringify(json));
 			for (var aa = 0, dados_1 = lista ; aa < dados_1.length; aa++) {
 				var linha = dados_1[aa]; 
-				var Url = linha['Url'] ; 
+				var Url = null ; 
+				if(linha['Url'] != undefined &&  linha['Url'] != null && linha['Url'] != 'null' && linha['Url'] != ''){
+					Url = linha['Url'] ; 
+				}
 				//endereco = Url.split("/"); 
 				//var menuu1 = endereco[4]; 
 				//var menuu = menuu1.split("?");   
@@ -30,27 +33,27 @@ var renderizador;
 					<span class="info-box-icon"><i class="fa fa-users"></i></span>  
 					<br><h5 style="float:left;">QUEM SOMOS</h5></a> 
 				</div>
-				*/
-				 
+				*/ 
 				console.log(((linha['Grid'])? Url+ imei:Url + imei));
 				var URLhref = '';
 				var icone_fa = '';
 				if(linha['Proc']){
-					URLhref = "javascript:proc.procedimentoExterno('"+Url+"')" ;
+					URLhref = "javascript:proc.procedimentoExterno('"+Url+imei+"')" ;
 					icone_fa =  '<i class="fa fa-share-square-o" aria-hidden="true"></i>' ;
 				}else{
 					URLhref = ( (linha['Grid'])? 'dados.html?posicao=' + aa + '&Url='+codifica(Url + imei) : 'menu_dados.html?posicao=' + aa + '&Url=' +codifica(Url + imei)) +'&Menu=' + linha['Menu'] ;
 					icone_fa = ((linha['Grid'])?'<i class="fa fa-table" aria-hidden="true"></i>' : '<i class="fa fa-bars" aria-hidden="true"></i>');									
-				}
-				
+				} 
 				tabela += '<div class="col-lg-6 m-b-2"> <div class="card"> ' +  
-				'<a href="' + URLhref + '" class="btn btn-primary" style="line-height: 1.0;min-height:55px;">';
+				 ( (Url != null)
+				 ? '<a  href="' + URLhref + '"  class="btn btn-primary" style="line-height: 1.0;min-height:55px; color:#fff;">'
+				 : '<a class="btn btn-primary" style="line-height: 1.0;min-height:55px; color:#ddd;">'
+				 );
 			  
 				tabela += '<span class="info-box-icon">'
 				+ icone_fa
 				+ '</span>' 
-				+ '<br/>';
-				 
+				+ '<br/>'; 
 				tabela +=  '<h5  style="float:left;text-transform:uppercase;">' + linha['Menu']  + '</h5>'  ;
 				
 				if(linha['captions'].length > 0){
@@ -65,9 +68,10 @@ var renderizador;
 				}
 				tabela +=  '</a> '
 				+ '</div></div>' ;
+				
 			}
 		}else{
-			alert('Menú inacessível')
+			alert('MenÃº inacessÃ­vel')
 		} 
 		return tabela;
 	}
@@ -91,8 +95,8 @@ var proc;
 			async : true,
 			statusCode: {
 				404: function() {
-					alert( "Página inacessível" );
-					console.log('Página inacessível');
+					alert( "PÃ¡gina inacessÃ­vel" );
+					console.log('PÃ¡gina inacessÃ­vel');
 				}
 			}
 		}).done(function( data, textStatus, jqXHR  ) {
@@ -106,14 +110,14 @@ var proc;
 			
 		}).fail(function(jqXHR, textStatus, errorThrown  ) {  
 			console.log('----------------');
-			console.log( "Falha na requisição de dados : ");
+			console.log( "Falha na requisiÃ§Ã£o de dados : ");
 			console.log(jqXHR); 
 			console.log('....');
 			console.log(textStatus);
 			console.log('....');
 			console.log(errorThrown);
 			console.log('----------------');
-			alert( "Não foi possível acessar  esta tela com seus respectivos dados" );
+			alert( "NÃ£o foi possÃ­vel acessar  esta tela com seus respectivos dados" );
 			$('#tabeladinamica').css("display","none");
 		}).always(function() {
 			console.log( "complete" );

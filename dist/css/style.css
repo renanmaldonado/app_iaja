@@ -382,7 +382,7 @@ color:#ccc
 	background-image: none;
 	padding: 23px 20px !important;
 	font-family: fontAwesome;
-	font-size: 14px;
+	font-size: 16px;
 }
 .main-header .sidebar-toggle:before {
 	content: "\f0c9"

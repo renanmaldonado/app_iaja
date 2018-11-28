@@ -1,4 +1,4 @@
-/*================== Servidor remoto Config =================*/
+﻿/*================== Servidor remoto Config =================*/
 //var servidor = 'http://eventos.usb.org.br/fortes'; 
  var servidor = 'https://appiaja.adventistas.org';
 //var servidor = 'http://192.168.1.171/fortes';

@@ -1,4 +1,4 @@
-// from Ideal.js (https://github.com/webarthur/ideal.js)
+﻿// from Ideal.js (https://github.com/webarthur/ideal.js)
 window.location.getQueryParams = function(query) {
 
     // se o parâmetro query não foi definido pega o parâmetro da URL

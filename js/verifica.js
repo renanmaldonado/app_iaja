@@ -19,6 +19,7 @@ var verifica;
 			}
 		}).done(function( data, textStatus, jqXHR  ) { 
 			json = data ;  
+			$('.linklogado').css("display","none");
 			if(json.Registrado){
 				$('.linklogado').css("display","block");	
 				$('#nomeUsuario').empty().html(limitarString(json.Nome,40));
@@ -38,6 +39,7 @@ var verifica;
 			console.log(errorThrown);
 			console.log('----------------'); 
 			*/
+			$('.linklogado').css("display","none");
 		}); 
 		return retorno ;
 	}
