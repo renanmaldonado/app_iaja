@@ -50,6 +50,11 @@
 				vertical-align: middle;
 				line-height: unset; 
 				padding:5px 5px 5px 5px; 
+			} 
+			.dataTables_paginate{ 
+				font-size:14px;
+				height:auto;
+				overflow: auto;
 			}
 		</style
 	</head>
@@ -369,6 +374,7 @@
 									// var infoTabela = JSON.parse($('#infoTabela'+bb).html()); 
 									console.log( 'infoTabela - '+bb+' - qtderegistros: '+json.tabelas[(bb-1)].dados.length+' - QuantLin: '+json.tabelas[(bb-1)].QuantLin); 
 									
+
 									var iDisplayLength =  json.tabelas[(bb-1)].QuantLin;
 									var var_pageLength =  json.tabelas[(bb-1)].QuantLin;
 									
@@ -376,13 +382,13 @@
 									var var_info = (json.tabelas[(bb-1)].dados.length > json.tabelas[(bb-1)].QuantLin )?true:false;
 									var var_searching = (json.tabelas[(bb-1)].dados.length >  json.tabelas[(bb-1)].QuantLin )?true:false;
 									$('#example' + bb).DataTable({
-										"language": {  url: 'lib/DataTables/localisation/pt-BR.json' }
+										"language": {  url: 'lib/DataTables/localisation/pt-BR.json' } 
+										,"pagingType": "numbers"
 										,"ordering": false
 										,"bSort": false  	
-										,"aLengthMenu":[5,7,10,15, 20, 25, 35 , 40, 50, 60, 70, 100 ]
+										,"lengthMenu":[5,7,10,15, 20, 25, 35 , 40, 50, 60, 70, 100,var_pageLength ]
 										,"iDisplayLength": iDisplayLength  
 										,"pageLength": var_pageLength 
-										
 										,"bPaginate": var_bPaginate 
 										,"info": var_info
 										,"searching": var_searching

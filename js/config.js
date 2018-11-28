@@ -363,7 +363,7 @@ getIPs(function(ip){
   }
 })(this);
 
-
+/*
 txt += "" + navigator.appCodeName + "";
 txt += "" + navigator.appName + "";
 txt += "" + navigator.appVersion + "";
@@ -372,7 +372,13 @@ txt += "" + navigator.language + "";
 txt += "" + navigator.onLine + "";
 txt += "" + navigator.platform + "";
 txt += "" + navigator.userAgent + "";
- 
+ */
+txt += "" + navigator.appCodeName + "";
+txt += "" + navigator.appName + "";
+txt += "" + navigator.appVersion + ""; 
+txt += "" + navigator.language + ""; 
+txt += "" + navigator.platform + "";
+txt += "" + navigator.userAgent + "";
 
 ///============ var imei =   md5(txt); ===============
 // var imei = "d41d8cd98f00b204e9800998ecf8427e";

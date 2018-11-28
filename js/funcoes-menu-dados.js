@@ -47,7 +47,7 @@ var renderizador;
 				tabela += '<div class="col-lg-6 m-b-2"> <div class="card"> ' +  
 				 ( (Url != null)
 				 ? '<a  href="' + URLhref + '"  class="btn btn-primary" style="line-height: 1.0;min-height:55px; color:#fff;">'
-				 : '<a class="btn btn-primary" style="line-height: 1.0;min-height:55px; color:#ddd;">'
+				 : '<a class="btn btn-primary" style="line-height: 1.0;min-height:55px; color:#bbb;">'
 				 );
 			  
 				tabela += '<span class="info-box-icon">'
