@@ -160,7 +160,9 @@ var renderizador;
 				$('.proximo').css('display','none');
 			}
 		}else{ 
+			$('#caixaAnteriorProximo').css('display','none');
 		}
+		
 		var caixalaranja = '';
 		if(json['Resumo']){  
 			$('#caixalaranja').empty().html();
