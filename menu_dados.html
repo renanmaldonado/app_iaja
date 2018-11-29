@@ -143,7 +143,7 @@
 					var jqxhr = $.getJSON( Url  , function() {
 						//console.log( "success" );
 					}).done(function(json) {
-						$('#menu').empty().html( renderizador.geraTabela(json));
+						$('#menu').empty().html( menurender.geraTabela(json));
 						//console.log( "second success" );
 					}).fail(function( jqxhr, textStatus, error ) {
 						var err = textStatus + ", " + error;

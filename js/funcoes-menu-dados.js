@@ -1,6 +1,6 @@
-﻿//========= renderizador =============//
-var renderizador; 
-(function (renderizador) {
+﻿//========= menurender =============//
+var menurender; 
+(function (menurender) {
 
 	//---------// 
 	function geraTabela(json) {
@@ -63,8 +63,8 @@ var renderizador;
 						tabela += '';
 						tabela += '<br/>' ; 
 						tabela += '<h6 style="float:left;text-align:text-align:'+((capt.Centraliza)? 'center':'left' ) 
-						+';width:100%;font-size:'+capt.TamFont+'px;'
-						+ ((capt.Negrito)? 'font-weight:700;' : '' ) +'color:' + ((json.Cor != null)? ''+json.Cor  :'#fff'  ) + '+'">'+ capt.Nome+ '</h6>' ;
+						+';width:100%;font-size:' + capt.TamFont + 'px;'
+						+ ((capt.Negrito)? 'font-weight:700;' : '' ) +'color:' + ((json.Cor != null)? ''+json.Cor  :'#fff'  )  +'">'+ capt.Nome+ '</h6>' ;
 						tabela += '<br/>'; 
 					}
 				}
@@ -79,9 +79,9 @@ var renderizador;
 	}
 	//---------//
 
-renderizador.geraTabela = geraTabela;
-})(renderizador || (renderizador = {}));
-//========= renderizador =============//
+menurender.geraTabela = geraTabela;
+})(menurender || (menurender = {}));
+//========= menurender =============//
 
 
 //========= proc =============//
