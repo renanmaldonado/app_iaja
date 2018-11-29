@@ -208,7 +208,7 @@ var renderizador;
 				var captions = tabe['captions'];
 				// $('#caixalaranja').append('<h5 class="text-white" style="text-align:center;">'+caption_+'</h5>' );
 
-				tabela += '<div class="info-box bg-blue">'; 
+				tabela += '<div class="info-box '+((tabe.ResumoCor != null)? '': 'bg-blue')+'" style="'+((tabe.ResumoCor != null)? 'background-color:'+tabe.ResumoCor +';' :''  )+'">'; 
 				tabela += '<div class="info-box-content">'; 
 				for (var jj = 0, ca = captions; jj < ca.length; jj++) {
 					var capt = ca[jj];
@@ -354,6 +354,8 @@ var renderizador;
 							,"searching": var_searching
 						});
 					}  
+					$('#carregando').attr("src","");
+					$('#carregando').attr("display","none");
 				});  
 			}else{
 				alert('página inacessível');

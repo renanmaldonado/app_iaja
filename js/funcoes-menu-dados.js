@@ -52,8 +52,8 @@ var menurender;
 				} 
 				tabela += '<div class="col-lg-6 m-b-2"> <div class="card"> ' +  
 				 ( (Url != null)
-				 ? '<a  href="' + URLhref + '"  class="btn btn-primary" style="line-height: 1.0;min-height:55px; color:#fff;">'
-				 : '<a class="btn btn-primary" style="line-height: 1.0;min-height:55px; color:#bbb;">'
+				 ? '<a  href="' + URLhref + '"  class="btn btn-primary" style="line-height: 1.0;min-height:55px; color:#fff; '+((json.Cor != null)? 'background-color:'+json.Cor +';"' :''  )+'">'
+				 : '<a class="btn btn-primary" style="line-height: 1.0;min-height:55px; color:#bbb;'+((json.Cor != null)? 'background-color:'+json.Cor +';"' :''  )+'">'
 				 );
 			  
 				tabela += '<span class="info-box-icon">' + icone_fa + '</span>' ;
@@ -90,6 +90,8 @@ var menurender;
 		}).done(function(json) {
 			$('#menu').empty().html( geraTabela(json,imei));
 			//console.log( "second success" );
+			$('#carregando').attr("src","");
+			$('#carregando').attr("display","none");
 		}).fail(function( jqxhr, textStatus, error ) {
 			var err = textStatus + ", " + error;
 			console.log( "Request Failed: " + err );
