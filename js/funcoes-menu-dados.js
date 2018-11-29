@@ -50,10 +50,8 @@ var menurender;
 				 : '<a class="btn btn-primary" style="line-height: 1.0;min-height:55px; color:#bbb;">'
 				 );
 			  
-				tabela += '<span class="info-box-icon">'
-				+ icone_fa
-				+ '</span>' 
-				+ '<br/>'; 
+				tabela += '<span class="info-box-icon">' + icone_fa + '</span>' ;
+				tabela += '<br/>'; 
 				tabela +=  '<h5  style="float:left;text-transform:uppercase;">' + linha['Menu']  + '</h5>'  ;
 				
 				if(linha['captions'].length > 0){
@@ -62,7 +60,7 @@ var menurender;
 						var capt = ca[jj];
 						tabela += '';
 						tabela += '<br/>' ; 
-						tabela += '<h6 style="float:left;text-align:text-align:'+((capt.Centraliza)? 'center':'left' ) 
+						tabela += '<h6 style="float:left;text-align:'+((capt.Centraliza)? 'center':'left' ) 
 						+';width:100%;font-size:' + capt.TamFont + 'px;'
 						+ ((capt.Negrito)? 'font-weight:700;' : '' ) +'color:' + ((json.Cor != null)? ''+json.Cor  :'#fff'  )  +'">'+ capt.Nome+ '</h6>' ;
 						tabela += '<br/>'; 
