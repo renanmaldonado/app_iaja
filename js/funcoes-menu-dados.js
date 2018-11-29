@@ -62,7 +62,9 @@ var renderizador;
 						var capt = ca[jj];
 						tabela += '';
 						tabela += '<br/>' ; 
-						tabela += '<h6 style="float:left;text-align:left;width:100%;font-size:'+capt.TamFont+'px;'+((capt.Negrito)? 'font-weight:700;' :''  )+'">'+ capt.Nome+ '</h6>' ;
+						tabela += '<h6 style="float:left;text-align:text-align:'+((capt.Centraliza)? 'center':'left' ) 
+						+';width:100%;font-size:'+capt.TamFont+'px;'
+						+ ((capt.Negrito)? 'font-weight:700;' : '' ) +'color:' + ((json.Cor != null)? ''+json.Cor  :'#fff'  ) + '+'">'+ capt.Nome+ '</h6>' ;
 						tabela += '<br/>'; 
 					}
 				}

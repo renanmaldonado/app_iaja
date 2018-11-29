@@ -131,37 +131,49 @@ var renderizador;
 (function (renderizador) {
 	
 	//---------// 
-	function geraTabela(json) {  
-		 
+	function geraTabela(json,urljson) {  
+		
 		var params   = location.getQueryParams();
 		var Menu     = params['Menu'] ;   
 		
 		dadosconta.tabelaDadosConta(json.UrlTable);
 		var tabelas = json.tabelas ;
 		$('#qtde_tabelas').val(json.tabelas.length);
+		
 		if(json['Combo']){ 
 			var TxtAnt = json.ComboUrls.Anterior['TxtAnt'];
 			var UrlAnt = json.ComboUrls.Anterior['UrlAnt'];
 			console.log('UrlAnt : '+UrlAnt);
 			if(TxtAnt != null && TxtAnt != '' && UrlAnt != null && UrlAnt != '' ){
+				if(urljson != (UrlAnt+imei) ){ 
 				console.log('UrlAnt: '+UrlAnt);  
-				$('.anterior').empty().html('<a  class="btn btn-secondary" href="dados.html?Url=' +codifica(UrlAnt+imei) +'&Menu=' + Menu +'"   ><i class="fa fa-mail-reply"></i>  '+TxtAnt+'</a>');
-				$('.anterior').css('display','block');
+					//$('.anterior').empty().html('<a  class="btn btn-secondary" href="dados.html?Url=' +codifica(UrlAnt+imei) +'&Menu=' + Menu +'"   ><i class="fa fa-mail-reply"></i>  '+TxtAnt+'</a>');
+					$('.anterior').empty().html('<a  class="btn btn-secondary" href="javascript:renderizador.carregaDadosDaGrid(\'' +(UrlAnt+imei) +'\')"><i class="fa fa-mail-reply"></i>  '+TxtAnt+'</a>');
+					$('.anterior').css('display','block');
+				}else{
+					$('.anterior').css('display','none');
+				}
 			}else{
 				$('.anterior').css('display','none');
 			} 
 			var TxtProx = json.ComboUrls.Proximo['TxtProx'];
 			var UrlProx = json.ComboUrls.Proximo['UrlProx']; 
-			if(TxtProx != null && TxtProx != '' && UrlProx != null && UrlProx != '' ){ 
-				console.log('UrlProx: '+UrlProx); 
-				$('.proximo').empty().html('<a class="btn btn-secondary" href="dados.html?Url=' +codifica(UrlProx+imei) +'&Menu=' + Menu +'" style="float:right;" >'+TxtProx+'  <i class="fa fa-mail-forward"></i></a>');  
-				$('.proximo').css('display','block');
+			if(TxtProx != null && TxtProx != '' && UrlProx != null && UrlProx != '' ){   
+				if(urljson != (UrlProx+imei) ){ 
+					console.log('UrlProx: '+UrlProx);  
+					//$('.proximo').empty().html('<a class="btn btn-secondary" href="dados.html?Url=' +codifica(UrlProx+imei) +'&Menu=' + Menu +'" style="float:right;" >'+TxtProx+'  <i class="fa fa-mail-forward"></i></a>');  
+					$('.proximo').empty().html('<a class="btn btn-secondary" href="javascript:renderizador.carregaDadosDaGrid(\'' +(UrlProx+imei) +'\')" style="float:right;" >'+TxtProx+'  <i class="fa fa-mail-forward"></i></a>');  
+					$('.proximo').css('display','block');
+				}else{
+					$('.proximo').css('display','none');
+				}
 			}else{
 				$('.proximo').css('display','none');
 			}
 		}else{ 
 			$('#caixaAnteriorProximo').css('display','none');
 		}
+		
 		
 		var caixalaranja = '';
 		if(json['Resumo']){  
@@ -280,7 +292,91 @@ var renderizador;
 	}
 	 
 	//---------//
+	function carregaDadosDaGrid(urljson) {
+		$.ajax({
+			url: urljson,
+			method: "GET",
+			cache: false,
+			dataType: "json", // text, html, xml, json, jsonp, script.  
+			async : true,
+			statusCode: {
+				404: function() {
+					alert( "Página inacessível" );
+					console.log('Página inacessível');
+				}
+			}
+		}).done(function( data, textStatus, jqXHR  ) {
+			console.log('_____');
+			console.log(textStatus);
+			console.log('_____');
+			console.log(jqXHR);
+			console.log('_____');
+			
+			$('#tabeladinamica').css("display","block");
+			
+			var json = data ;
+			
+			// $('#nome_usuario').empty().html(json.Nome);   
+			$('#tituloMenu').empty().html(json.Titulo); 
+			// $('#periodo').empty().html(json.Periodo); 
+			$('#nomeUsuario').empty().html(json.Nome); 
+			var UrlVolta = 'menu_dados.html?Url=' + codifica(json.UrlVolta+imei) + '&Menu=' ; 
+			$('#linkVoltar').attr("href",UrlVolta);
+
+			
+			if(json.tabelas != undefined){
+				$.when(  
+					$('#tabeladinamica').empty().html( renderizador.geraTabela(json,urljson) )
+				).then(function( data, textStatus, jqXHR ) {   
+					var qtde_tabelas = $('#qtde_tabelas').val();
+					for (var bb = 1 ; bb <= qtde_tabelas; bb++) { 
+						// $('#infoTabelas').append('<div>{ "qtderegistros": '+ dados_1.length +'}</div>');
+						// var infoTabela = JSON.parse($('#infoTabela'+bb).html()); 
+						console.log( 'infoTabela - '+bb+' - qtderegistros: '+json.tabelas[(bb-1)].dados.length+' - QuantLin: '+json.tabelas[(bb-1)].QuantLin); 
+						
+
+						var iDisplayLength =  json.tabelas[(bb-1)].QuantLin;
+						var var_pageLength =  json.tabelas[(bb-1)].QuantLin;
+						
+						var var_bPaginate = (json.tabelas[(bb-1)].dados.length >  json.tabelas[(bb-1)].QuantLin )?true:false;
+						var var_info = (json.tabelas[(bb-1)].dados.length > json.tabelas[(bb-1)].QuantLin )?true:false;
+						var var_searching = (json.tabelas[(bb-1)].dados.length >  json.tabelas[(bb-1)].QuantLin )?true:false;
+						$('#example' + bb).DataTable({
+							"language": {  url: 'lib/DataTables/localisation/pt-BR.json' } 
+							,"pagingType": "numbers"
+							,"ordering": false
+							,"bSort": false  	
+							,"lengthMenu":[5,7,10,15, 20, 25, 35 , 40, 50, 60, 70, 100,var_pageLength ]
+							,"iDisplayLength": iDisplayLength  
+							,"pageLength": var_pageLength 
+							,"bPaginate": var_bPaginate 
+							,"info": var_info
+							,"searching": var_searching
+						});
+					}  
+				});  
+			}else{
+				alert('página inacessível');
+			} 
+		}).fail(function(jqXHR, textStatus, errorThrown  ) {  
+			console.log('----------------');
+			console.log( "Falha na requisição de dados : ");
+			console.log(jqXHR); 
+			console.log('....');
+			console.log(textStatus);
+			console.log('....');
+			console.log(errorThrown);
+			console.log('----------------');
+			alert( "Não foi possível acessar  esta tela com seus respectivos dados" );
+			$('#tabeladinamica').css("display","none");
+		}).always(function() {
+			console.log( "complete" );
+		}); 
+		//========= get Dados JSON =============//
+	}
+	//---------//
 	renderizador.geraTabela = geraTabela;
+	renderizador.carregaDadosDaGrid = carregaDadosDaGrid;
 })(renderizador || (renderizador = {}));
 //========= renderizador =============//
 
