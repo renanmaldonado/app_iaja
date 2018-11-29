@@ -11,8 +11,14 @@ var menurender;
 		var lista = json[posicao];   */
 		
 		$('#nomeUsuario').empty().html(json.Nome); 
-		var UrlVolta =    'menu_dados.html?Url=' +codifica(json.UrlVolta + imei)     +'&Menu=' ;
-		$('#linkVoltar').attr("href",UrlVolta);
+		
+		if(json.UrlVolta != undefined && json.UrlVolta != null & json.UrlVolta != 'null' && json.UrlVolta != '' ){
+			var UrlVolta =    'menu_dados.html?Url=' +codifica(json.UrlVolta + imei)     +'&Menu=' ;
+			$('#linkVoltar').attr("href",UrlVolta);
+		}else{
+			$('#linkVoltar').attr("href","menu_dados.html");
+		}
+		
 		 
 		if(json.dados != undefined && json.dados != 'null'  && json.dados != '' && json.dados != null){
 			var lista = json.dados; 
