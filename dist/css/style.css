@@ -86,7 +86,8 @@ a:hover, a:active, a:focus {
 }
 @media (max-width:767px) {
 .content-wrapper, .main-footer {
-	margin-left: 0
+	margin-left: 0;
+	margin-top: 62px;
 }
 }
 @media (min-width:768px) {
