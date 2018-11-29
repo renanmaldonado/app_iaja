@@ -3,7 +3,7 @@ var menurender;
 (function (menurender) {
 
 	//---------// 
-	function geraTabela(json) {
+	function geraTabela(json,imei) {
 		//console.log(JSON.stringify(json));
 		var tabela = ''; 
 		/*  var params = location.getQueryParams();
@@ -83,7 +83,23 @@ var menurender;
 	}
 	//---------//
 
-menurender.geraTabela = geraTabela;
+	function carregaMenu(urljson) {
+		console.log(urljson);  
+		var jqxhr = $.getJSON( urljson  , function() {
+			//console.log( "success" );
+		}).done(function(json) {
+			$('#menu').empty().html( geraTabela(json,imei));
+			//console.log( "second success" );
+		}).fail(function( jqxhr, textStatus, error ) {
+			var err = textStatus + ", " + error;
+			console.log( "Request Failed: " + err );
+		}).always(function() {
+			//console.log( "complete" );
+		}); 
+	}
+	//---------//
+	menurender.carregaMenu = carregaMenu ;
+	menurender.geraTabela = geraTabela;
 })(menurender || (menurender = {}));
 //========= menurender =============//
 
