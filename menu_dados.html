@@ -129,11 +129,14 @@
 		<script type="text/javascript">
 			$(document).ready(function() { 
 				var  Url = servidor +'/webapiiaja/MainMenu?imei=' + imei + '' ;
-  
+				var params = location.getQueryParams(); 
 				if(verifica.verificaRegistro(servidor,imei)){
 					var params = location.getQueryParams();
-
-					if(params['Url'] != undefined && params['Url'] != null && params['Url'] != ''){ 
+					var nomeusuario =  params['nomeusuario'] ;  
+					if(nomeusuario != undefined  && nomeusuario != null && nomeusuario != 'null' && nomeusuario != '' ){
+						$('#nomeUsuario').empty().html(nomeusuario); 
+					}  
+					if(params['Url'] != undefined  && params['Url'] != null && params['Url'] != 'null' && params['Url'] != '' ){
 						Url = descodifica(params['Url'])  ;
 						$('#voltar').css('display','block');
 						$('#nome').empty().html(params['Menu']);
@@ -144,11 +147,10 @@
 						menurender.carregaMenu(Url);
 						$('#voltar').css('display','none'); 
 						$('#nome').empty().html('Menu Principal');
-					}
- 
+					} 
 				}else{
-				
-				}
+					window.location.href="login.html";
+				} 
 			}); 
 		</script> 
 	</body>

@@ -22,6 +22,7 @@ var menurender;
 		 
 		if(json.dados != undefined && json.dados != 'null'  && json.dados != '' && json.dados != null){
 			var lista = json.dados; 
+			 
 			//$('#cosoleLogMenu').append(JSON.stringify(json));
 			for (var aa = 0, dados_1 = lista ; aa < dados_1.length; aa++) {
 				var linha = dados_1[aa]; 
@@ -47,16 +48,21 @@ var menurender;
 					URLhref = "javascript:proc.procedimentoExterno('"+Url+imei+"')" ;
 					icone_fa =  '<i class="fa fa-share-square-o" aria-hidden="true"></i>' ;
 				}else{
-					URLhref = ( (linha['Grid'])? 'dados.html?posicao=' + aa + '&Url='+codifica(Url + imei) : 'menu_dados.html?posicao=' + aa + '&Url=' +codifica(Url + imei)) +'&Menu=' + linha['Menu'] ;
+					URLhref = ( (linha['Grid'])
+					? 'dados.html?posicao=' + aa + '&Url='+codifica(Url + imei) +'&nomeusuario=' + $('#nomeUsuario').html() 
+					: 'menu_dados.html?posicao=' + aa + '&Url=' +codifica(Url + imei)) +'&Menu=' + linha['Menu'] +'&nomeusuario=' + $('#nomeUsuario').html();
 					icone_fa = ((linha['Grid'])?'<i class="fa fa-table" aria-hidden="true"></i>' : '<i class="fa fa-bars" aria-hidden="true"></i>');									
 				} 
+			 
+				
 				tabela += '<div class="col-lg-6 m-b-2"> <div class="card"> ' +  
 				 ( (Url != null)
-				 ? '<a  href="' + URLhref + '"  class="btn btn-primary" style="line-height: 1.0;min-height:55px; color:#fff; '+((json.Cor != null)? 'background-color:'+json.Cor +';"' :''  )+'">'
-				 : '<a class="btn btn-primary" style="line-height: 1.0;min-height:55px; color:#bbb;'+((json.Cor != null)? 'background-color:'+json.Cor +';"' :''  )+'">'
+				 ? '<a  href="' + URLhref + '" class="btn btn-primary" style="line-height: 1.0;min-height:55px;color:#fff;'
+					+((json.Cor != null)? 'background-color:'+json.Cor +';border-color:#bbb':'')+'"><span class="info-box-icon">' + icone_fa + '</span>' 
+				 : '<a class="btn btn-primary" style="line-height: 1.0;min-height:55px; color:#fff;'
+					+((json.Cor != null)? 'background-color:'+json.Cor +';border-color:#bbb' :''  )+'">'
 				 );
-			  
-				tabela += '<span class="info-box-icon">' + icone_fa + '</span>' ;
+			   
 				tabela += '<br/>'; 
 				tabela +=  '<h5  style="float:left;text-transform:uppercase;">' + linha['Menu']  + '</h5>'  ;
 				
@@ -76,6 +82,11 @@ var menurender;
 				+ '</div></div>' ;
 				
 			}
+			if(json.Cor != null){ 
+				$('#linkVoltar').css('background-color',json.Cor);
+				$('#linkVoltar').css('border-color','#bbb');
+			} 
+			
 		}else{
 			alert('Menú inacessível')
 		} 

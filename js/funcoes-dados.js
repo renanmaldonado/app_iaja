@@ -35,8 +35,12 @@ var dadosconta;
 
 		var colunas = '';
 		for (var aa = 0, cab_1 = cab; aa < cab_1.length; aa++) {
-			var linha = cab_1[aa];
-			colunas += '<th style="font-size: '+tamFont+'px; height:'+altLin+'px;">' + linha['nome']+ '</th>';
+			var linha = cab_1[aa]; 
+			colunas += (
+						(linha['nome']==='Valor')
+						?'<th style="font-size: '+tamFont+'px; height:'+altLin+'px;text-align:right;">' + linha['nome']+ '</th>'
+						:'<th style="font-size: '+tamFont+'px; height:'+altLin+'px;">' + linha['nome']+ '</th>'
+						);
 		}
 		var thead = '';
 		thead += '<thead>';
@@ -174,9 +178,9 @@ var renderizador;
 			$('#caixaAnteriorProximo').css('display','none');
 		}
 		
-		
+	  
 		var caixalaranja = '';
-		if(json['Resumo']){  
+		if(json['Resumo']){   
 			$('#caixalaranja').empty().html();
 			$('#resumoLiquido').css("display","block");
 			var captions = json['captions'];   
@@ -186,6 +190,8 @@ var renderizador;
 				+';font-size:'+capt.TamFont+'px;'+((capt.Negrito)? 'font-weight:700;' :''  )+' color:' + ( (capt.ResumoCor != null)? ''+capt.ResumoCor  :'#fff'  ) + '">'+capt.Nome+'</h6>' ;
 			}   
 			$('#caixalaranja').empty().html(caixalaranja);
+			
+
 		}else{ 
 			$('#resumoLiquido').css("display","none"); 
 		}
@@ -201,15 +207,26 @@ var renderizador;
 			var altLin =  tabe['AltLin'];
 			//console.log(JSON.stringify(tabe));
 			var cab = tabe['cab'];
-			var dados = tabe['dados'];
+			var dados = tabe['dados']; 
+ 
 			if(tabe['Resumo']){ 
 				// $('#saldo').empty().html(json.SaldoGeral);
 				
-				var captions = tabe['captions'];
-				// $('#caixalaranja').append('<h5 class="text-white" style="text-align:center;">'+caption_+'</h5>' );
+				if(tabe.ResumoCor != null){
+					//console.log('tabe.ResumoCor : ' + tabe.ResumoCor );
+					$('#linkVoltar').css('background-color', tabe.ResumoCor);
+					$('#linkVoltar').css('border-color','#bbb');
+					tabela += '<div class="info-box" style="background-color:'+tabe.ResumoCor +';">'; 
+				}else{
+					tabela += '<div class="info-box bg-blue">'; 
+				}
 
-				tabela += '<div class="info-box '+((tabe.ResumoCor != null)? '': 'bg-blue')+'" style="'+((tabe.ResumoCor != null)? 'background-color:'+tabe.ResumoCor +';' :''  )+'">'; 
+				// $('#caixalaranja').append('<h5 class="text-white" style="text-align:center;">'+caption_+'</h5>' );
+				
+				// tabela += '<div class="info-box '+((tabe.ResumoCor != null)? '': 'bg-blue')+'" style="'+((tabe.ResumoCor != null)? 'background-color:'+tabe.ResumoCor +';' :''  )+'">'; 
+				
 				tabela += '<div class="info-box-content">'; 
+				var captions = tabe['captions'];
 				for (var jj = 0, ca = captions; jj < ca.length; jj++) {
 					var capt = ca[jj];
 					tabela += '<h6 class="info-box-text text-white" style="text-align:'+((capt.Centraliza)? 'center':'left' )
@@ -232,8 +249,12 @@ var renderizador;
 
 			var colunas = '';
 			for (var aa = 0, cab_1 = cab; aa < cab_1.length; aa++) {
-				var linha = cab_1[aa];
-				colunas += '<th style="font-size: '+tamFont+'px; height:'+altLin+'px; ">' + linha['nome']+ '</th>';
+				var linha = cab_1[aa]; 
+				colunas += (
+							(linha['nome']==='Valor')
+							?'<th style="font-size: '+tamFont+'px; height:'+altLin+'px;text-align:right;">' + linha['nome']+ '</th>'
+							:'<th style="font-size: '+tamFont+'px; height:'+altLin+'px;">' + linha['nome']+ '</th>'
+							);
 			}
 			var thead = '';
 			thead += '<thead>';

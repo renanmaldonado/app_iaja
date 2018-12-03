@@ -329,18 +329,23 @@
 			
 				//========= get Dados JSON =============//
                 var params = location.getQueryParams();
-                var Url = descodifica(params['Url']);  
-				//var Menu =  params['Menu'] ;   
-                console.log(Url);  
-				var urljson = Url ;
-				// console.log( Url) 
-				
-				
-				if(verifica.verificaRegistro(servidor,imei)){
-					renderizador.carregaDadosDaGrid(Url);
- 				}else{
-				
-				}
+				//var Menu =  params['Menu'] ;    
+				if(params['Url'] != undefined  && params['Url'] != null && params['Url'] != 'null' && params['Url'] != '' ){
+					var Url = descodifica(params['Url']);  
+					console.log(Url);
+					if(verifica.verificaRegistro(servidor,imei)){
+						renderizador.carregaDadosDaGrid(Url);
+					}else{
+						window.location.href="login.html";
+					} 
+					// console.log( Url) 
+					var nomeusuario =  params['nomeusuario'] ;  
+					if(nomeusuario != undefined  && nomeusuario != null && nomeusuario != 'null' && nomeusuario != '' ){
+						$('#nomeUsuario').empty().html(nomeusuario); 
+					} 
+				}else{
+					window.location.href="menu_dados.html";
+				}   
             }); 
 			
 		</script>  
