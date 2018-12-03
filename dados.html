@@ -329,7 +329,10 @@
 			
 				//========= get Dados JSON =============//
                 var params = location.getQueryParams();
-				//var Menu =  params['Menu'] ;    
+				//var Menu =  params['Menu'] ;  
+				if(params['nomeusuario'] != undefined  && params['nomeusuario'] != null && params['nomeusuario'] != 'null' && params['nomeusuario'] != '' ){
+					$('#nomeUsuario').empty().html(params['nomeusuario']); 
+				}  
 				if(params['Url'] != undefined  && params['Url'] != null && params['Url'] != 'null' && params['Url'] != '' ){
 					var Url = descodifica(params['Url']);  
 					console.log(Url);
@@ -338,11 +341,7 @@
 					}else{
 						window.location.href="login.html";
 					} 
-					// console.log( Url) 
-					var nomeusuario =  params['nomeusuario'] ;  
-					if(nomeusuario != undefined  && nomeusuario != null && nomeusuario != 'null' && nomeusuario != '' ){
-						$('#nomeUsuario').empty().html(nomeusuario); 
-					} 
+					// console.log( Url)  
 				}else{
 					window.location.href="menu_dados.html";
 				}   

@@ -130,12 +130,11 @@
 			$(document).ready(function() { 
 				var  Url = servidor +'/webapiiaja/MainMenu?imei=' + imei + '' ;
 				var params = location.getQueryParams(); 
-				if(verifica.verificaRegistro(servidor,imei)){
-					var params = location.getQueryParams();
-					var nomeusuario =  params['nomeusuario'] ;  
-					if(nomeusuario != undefined  && nomeusuario != null && nomeusuario != 'null' && nomeusuario != '' ){
-						$('#nomeUsuario').empty().html(nomeusuario); 
-					}  
+		 
+				if(params['nomeusuario'] != undefined  && params['nomeusuario'] != null && params['nomeusuario'] != 'null' && params['nomeusuario'] != '' ){
+					$('#nomeUsuario').empty().html(params['nomeusuario']); 
+				}  
+				if(verifica.verificaRegistro(servidor,imei)){  
 					if(params['Url'] != undefined  && params['Url'] != null && params['Url'] != 'null' && params['Url'] != '' ){
 						Url = descodifica(params['Url'])  ;
 						$('#voltar').css('display','block');
