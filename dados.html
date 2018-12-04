@@ -337,7 +337,7 @@
 					var Url = descodifica(params['Url']);  
 					console.log(Url);
 					if(verifica.verificaRegistro(servidor,imei)){
-						renderizador.carregaDadosDaGrid(Url);
+						renderizador.carregaDadosDaGrid(Url,imei);
 					}else{
 						window.location.href="login.html";
 					} 

@@ -128,29 +128,101 @@
 		<script src="js/funcoes-menu-dados.js"></script>
 		<script type="text/javascript">
 			$(document).ready(function() { 
-				var  Url = servidor +'/webapiiaja/MainMenu?imei=' + imei + '' ;
-				var params = location.getQueryParams(); 
-		 
-				if(params['nomeusuario'] != undefined  && params['nomeusuario'] != null && params['nomeusuario'] != 'null' && params['nomeusuario'] != '' ){
-					$('#nomeUsuario').empty().html(params['nomeusuario']); 
-				}  
-				if(verifica.verificaRegistro(servidor,imei)){  
-					if(params['Url'] != undefined  && params['Url'] != null && params['Url'] != 'null' && params['Url'] != '' ){
-						Url = descodifica(params['Url'])  ;
-						$('#voltar').css('display','block');
-						$('#nome').empty().html(params['Menu']);
-						var UrlVolta = 'menu_dados.html?Url=' + codifica(Url) + '&Menu=' ; 
-						$('#linkVoltar').attr("href",UrlVolta); 
-						menurender.carregaMenu(Url);
-					}else{ 
-						menurender.carregaMenu(Url);
-						$('#voltar').css('display','none'); 
-						$('#nome').empty().html('Menu Principal');
-					} 
-				}else{
-					window.location.href="login.html";
-				} 
-			}); 
+		        //Se esta rodando no App ou no Browser
+		        window.isphone = false;
+		        
+		        if(document.URL.indexOf("http://") === -1 && document.URL.indexOf("https://") === -1)
+		        {
+		            window.isphone = true;
+		        }
+		                      
+		        if( window.isphone )
+		        {
+		            document.addEventListener("deviceready", onDeviceReady, false);
+		        }
+		        else
+		        {
+		            onDeviceReady();
+		        }
+ 
+
+			});
+
+			function alertDismissed()
+			{
+			    // do something
+			}
+			function onConfirm(buttonIndex)
+			{
+			    if(buttonIndex == 2)
+			    {
+			        navigator.notification.alert('Você não autorizou por enquanto que este App utilize a sua localização!', alertDismissed, 'Atenção', 'Fechar');
+			        window.location.href='index.html';
+			        exit;
+			    }
+			} 
+			//Funcões e configurações
+			function onDeviceReady()
+			{
+			    var info
+			    var networkState = navigator.connection.type;
+			    
+			    //Sem conexão
+			    if(networkState == 'none')
+			    {
+			        navigator.notification.alert('Este conteúdo não pode ser exibido! É necessário estar conectado na Internet!', alertDismissed, 'Atenção', 'Fechar');
+			        window.location.href='index.html';
+			        exit;
+			    }
+			    //Conexão desconhecida
+			    else if(networkState == 'unknown')
+			    {
+			        navigator.notification.alert('Este conteúdo não pode ser exibido! É necessário estar conectado na Internet!', alertDismissed, 'Atenção', 'Fechar');
+			        window.location.href='index.html';
+			        exit;
+			    }
+			    //Conexão genérica
+			    else if(networkState == 'cell')
+			    {
+			        navigator.notification.alert('Este conteúdo não pode ser exibido corretamente! Requer uma melhor conexão com a Internet!', alertDismissed, 'Atenção', 'Fechar');
+			        window.location.href='index.html';
+			        exit;
+			    }
+			    //Conexão 2G
+			    else if(networkState == 'cell_2g')
+			    {
+			        navigator.notification.alert('Este conteúdo não pode ser exibido corretamente! Requer uma melhor conexão com a Internet!', alertDismissed, 'Atenção', 'Fechar');
+			        window.location.href='index.html';
+			        exit;
+			    }
+			    else
+			    {
+					alert(device.uuid);
+			        var imei = device.uuid ;
+					var  Url = servidor +'/webapiiaja/MainMenu?imei=' + imei + '' ;
+					var params = location.getQueryParams(); 
+			 
+					if(params['nomeusuario'] != undefined  && params['nomeusuario'] != null && params['nomeusuario'] != 'null' && params['nomeusuario'] != '' ){
+						$('#nomeUsuario').empty().html(params['nomeusuario']); 
+					}  
+					if(verifica.verificaRegistro(servidor,imei)){  
+						if(params['Url'] != undefined  && params['Url'] != null && params['Url'] != 'null' && params['Url'] != '' ){
+							Url = descodifica(params['Url'])  ;
+							$('#voltar').css('display','block');
+							$('#nome').empty().html(params['Menu']);
+							var UrlVolta = 'menu_dados.html?Url=' + codifica(Url) + '&Menu=' ; 
+							$('#linkVoltar').attr("href",UrlVolta); 
+							menurender.carregaMenu(Url,imei);
+						}else{ 
+							menurender.carregaMenu(Url,imei);
+							$('#voltar').css('display','none'); 
+							$('#nome').empty().html('Menu Principal');
+						} 
+					}else{
+						window.location.href="login.html";
+					}
+			    }
+			} 
 		</script> 
 	</body>
 </html>

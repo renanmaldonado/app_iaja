@@ -135,7 +135,7 @@ var renderizador;
 (function (renderizador) {
 	
 	//---------// 
-	function geraTabela(json,urljson) {  
+	function geraTabela(json,urljson,imei) {  
 		
 		var params   = location.getQueryParams();
 		var Menu     = params['Menu'] ;   
@@ -152,7 +152,7 @@ var renderizador;
 				if(urljson != (UrlAnt+imei) ){ 
 				console.log('UrlAnt: '+UrlAnt);  
 					//$('.anterior').empty().html('<a  class="btn btn-secondary" href="dados.html?Url=' +codifica(UrlAnt+imei) +'&Menu=' + Menu +'"   ><i class="fa fa-mail-reply"></i>  '+TxtAnt+'</a>');
-					$('.anterior').empty().html('<a  class="btn btn-secondary" href="javascript:renderizador.carregaDadosDaGrid(\'' +(UrlAnt+imei) +'\')"><i class="fa fa-mail-reply"></i>  '+TxtAnt+'</a>');
+					$('.anterior').empty().html('<a  class="btn btn-secondary" href="javascript:renderizador.carregaDadosDaGrid(\'' +(UrlAnt+imei) +'\',\''+imei+'\')"><i class="fa fa-mail-reply"></i>  '+TxtAnt+'</a>');
 					$('.anterior').css('display','block');
 				}else{
 					$('.anterior').css('display','none');
@@ -166,7 +166,7 @@ var renderizador;
 				if(urljson != (UrlProx+imei) ){ 
 					console.log('UrlProx: '+UrlProx);  
 					//$('.proximo').empty().html('<a class="btn btn-secondary" href="dados.html?Url=' +codifica(UrlProx+imei) +'&Menu=' + Menu +'" style="float:right;" >'+TxtProx+'  <i class="fa fa-mail-forward"></i></a>');  
-					$('.proximo').empty().html('<a class="btn btn-secondary" href="javascript:renderizador.carregaDadosDaGrid(\'' +(UrlProx+imei) +'\')" style="float:right;" >'+TxtProx+'  <i class="fa fa-mail-forward"></i></a>');  
+					$('.proximo').empty().html('<a class="btn btn-secondary" href="javascript:renderizador.carregaDadosDaGrid(\'' +(UrlProx+imei) +'\',\''+imei+'\')" style="float:right;" >'+TxtProx+'  <i class="fa fa-mail-forward"></i></a>');  
 					$('.proximo').css('display','block');
 				}else{
 					$('.proximo').css('display','none');
@@ -313,7 +313,7 @@ var renderizador;
 	}
 	 
 	//---------//
-	function carregaDadosDaGrid(urljson) {
+	function carregaDadosDaGrid(urljson,imei) {
 		$.ajax({
 			url: urljson,
 			method: "GET",
@@ -341,13 +341,13 @@ var renderizador;
 			$('#tituloMenu').empty().html(json.Titulo); 
 			// $('#periodo').empty().html(json.Periodo); 
 			$('#nomeUsuario').empty().html(json.Nome); 
-			var UrlVolta = 'menu_dados.html?Url=' + codifica(json.UrlVolta+imei) + '&Menu=' ; 
+			var UrlVolta = 'menu_dados.html?Url=' + codifica(json.UrlVolta + imei) + '&Menu=' ; 
 			$('#linkVoltar').attr("href",UrlVolta);
 
 			
 			if(json.tabelas != undefined){
 				$.when(  
-					$('#tabeladinamica').empty().html( renderizador.geraTabela(json,urljson) )
+					$('#tabeladinamica').empty().html( renderizador.geraTabela(json,urljson,imei) )
 				).then(function( data, textStatus, jqXHR ) {   
 					var qtde_tabelas = $('#qtde_tabelas').val();
 					for (var bb = 1 ; bb <= qtde_tabelas; bb++) { 

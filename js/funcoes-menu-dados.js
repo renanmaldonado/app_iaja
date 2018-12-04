@@ -18,7 +18,6 @@ var menurender;
 		}else{
 			$('#linkVoltar').attr("href","menu_dados.html");
 		}
-		
 		 
 		if(json.dados != undefined && json.dados != 'null'  && json.dados != '' && json.dados != null){
 			var lista = json.dados; 
@@ -94,7 +93,7 @@ var menurender;
 	}
 	//---------//
 
-	function carregaMenu(urljson) {
+	function carregaMenu(urljson,imei) {
 		console.log(urljson);  
 		var jqxhr = $.getJSON( urljson  , function() {
 			//console.log( "success" );
